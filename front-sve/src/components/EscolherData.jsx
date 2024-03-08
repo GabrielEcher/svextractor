@@ -1,8 +1,6 @@
 import  { useState } from 'react';
 import { format } from 'date-fns';
-import DatePicker from 'rsuite/DatePicker';
-import { ptBR } from 'date-fns/locale';  
-import { FaCalendar } from 'react-icons/fa';
+import DatePicker from 'rsuite/DatePicker';  
 
 // eslint-disable-next-line react/prop-types
 const EscolherData = ({ onDatesSelected }) => {
@@ -11,8 +9,8 @@ const EscolherData = ({ onDatesSelected }) => {
 
   const handleDateChange = () => {
     onDatesSelected({
-      startDate: startDate ? format(startDate, 'dd-MM-yyyy', { locale: ptBR }) : null,
-      endDate: endDate ? format(endDate, 'dd-MM-yyyy', { locale: ptBR }) : null,
+      startDate: startDate ? format(startDate, 'dd-MMM-yy',) : null,
+      endDate: endDate ? format(endDate, 'dd-MMM-yy',) : null,
     });
   };
 
@@ -43,11 +41,9 @@ const EscolherData = ({ onDatesSelected }) => {
           enddate={endDate}
           format='dd/MM/yyyy'
           placeholder='Data inicial:'
-          locale={ptBR}
           placement="bottomEnd"
           size='lg'
           oneTap
-          caretAs={FaCalendar}
           style={{marginRight: '5px'}}
         />
       </div>
@@ -60,12 +56,10 @@ const EscolherData = ({ onDatesSelected }) => {
           enddate={endDate}
           format='dd/MM/yyyy'
           placeholder='Data final:'
-          locale={ptBR}
           shouldDisableDate={(date) => date < startDate}
           placement="bottomEnd"
           size='lg'
           oneTap
-          caretAs={FaCalendar}
           style={{marginRight: '5px'}}
         />
 

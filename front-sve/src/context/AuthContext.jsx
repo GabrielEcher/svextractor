@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async ({ username, password }) => {
     try {
-      const result = await api_auth.post("/login", { username, password }, {
+      const result = await api_auth.post("/auth/token", { username, password }, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

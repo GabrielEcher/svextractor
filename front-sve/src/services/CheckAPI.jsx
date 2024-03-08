@@ -17,7 +17,7 @@ export const StatusButton = () => {
     useEffect(() => {
         async function checkApi() {
             try {
-                const response = await api_db.get("/")
+                const response = await api_db.get("/status")
                 setTooltipText('Serviço de busca do SVExtractor está online')
                 setApiStatus('greenyellow')
             } catch (err) {

@@ -41,13 +41,13 @@ function Login() {
     return (
       <div className="login"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#E8E8E8', }}>
-        
-        <Container style={{ width: '400px'}}>
+
+        <Container style={{ width: '400px' }}>
           <Content>
             <FlexboxGrid justify="center">
               <FlexboxGrid.Item colspan={12}>
                 <Panel header={<h3>Login</h3>} bordered
-                
+
                   style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '10px', }}>
                   <Form layout='vertical' key={renderKey}>
                     <Form.ControlLabel>Digite seu e-mail</Form.ControlLabel>
@@ -80,8 +80,7 @@ function Login() {
                       )}
                       <hr />
                       <ButtonToolbar>
-                        <Button size="lg" color="green" appearance="primary" type="button" onClick={handleLogin} >Entrar</Button>
-                        <Link onClick to={"/registro"} appearance="link" >Não tem uma conta?</Link>
+                        <Button style={{ width: '350px' }} size="lg" color="green" appearance="primary" type="button" onClick={handleLogin} >Entrar</Button>
                       </ButtonToolbar>
                     </Form.Group>
                   </Form>
@@ -97,8 +96,8 @@ function Login() {
                   icon={<FaGithub size='' />}
                   size="lg"
                   appearance="subtle"
-                  target='_blank' 
-                  />
+                  target='_blank'
+                />
                 <IconButton
                   href="https://www.linkedin.com/in/gabriel-m-echer-25a793249/"
                   icon={<LinkedinIcon />}

@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const api_db = new axios.create({
-    baseURL: "http://127.0.0.1:8000/",
+    baseURL: "https://svextractor.diamaju.com.br/",
 })
 
 export const api_auth = new axios.create({
-    baseURL: "http://127.0.0.1:8001/"
+    baseURL: "https://svextractor.diamaju.com.br/"
 })
 
 

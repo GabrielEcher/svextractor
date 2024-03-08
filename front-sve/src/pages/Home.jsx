@@ -37,7 +37,7 @@ const FetchData = () => {
     try {
       setLoading(true);
       const response = await api_db.get(`/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${selectedDates.startDate}/${selectedDates.endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}`);
-
+      console.log('API_URL:', response )
 
       setData(response.data);
       toast.success('Vendas obtidas com sucesso!')
@@ -85,7 +85,7 @@ const FetchData = () => {
 
       setTimeout(() => {
         a.click();
-      }, 5000);
+      }, 3000);
 
 
     } catch (err) {
@@ -145,7 +145,6 @@ const FetchData = () => {
 
   const handleReload = () => {
     setData([])
-    setSelectedCid(null)
   }
 
   return (
