@@ -186,9 +186,9 @@ const FetchData = () => {
           ></ToastContainer>
 
         </Header>
-        <Container style={{ display: 'flex', flexDirection: 'column', width: '100%', marginLeft: '0.5%', }}>
+        <Container style={{ display: 'flex', flexDirection: 'column', width: '100%', }}>
 
-          <Content style={{ width: '100%', maxWidth: '1490px' }}>
+          <Content style={{ width: '100%',}}>
 
             {/* Primeira linha */}
             <div className="inputs" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
@@ -216,7 +216,7 @@ const FetchData = () => {
             </div>
           </Content>
 
-          <Content style={{ width: '100%', maxWidth: '1500px' }}>
+          <Content style={{ width: '100%', }}>
             <Table
               virtualized height={470}
               data={data}
@@ -274,7 +274,7 @@ const FetchData = () => {
         </Container>
 
         <Footer style={{ marginTop: '5px', textAlign: 'left', marginLeft: '10px' }}>SVExtractor - v1.0.0</Footer>
-        
+
       </Container>
     </div>
   );
