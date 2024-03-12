@@ -1,4 +1,3 @@
-import 'rsuite/dist/rsuite.min.css';
 import '../src/styles/style.css'
 import 'rsuite/Dropdown/styles/index.css';
 import 'rsuite/Notification/styles/index.css';
