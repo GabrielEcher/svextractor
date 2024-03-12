@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs'
 import { useState } from 'react'
-import { Container, Header, Content, Footer, Table } from 'rsuite';
+import { Container, Header, Content, Table } from 'rsuite';
 import { toast, ToastContainer } from 'react-toastify';
 import { BuscarDados, GerarRelatorio, LogoutButton, CleanButton, SkypeButton, WppButton } from '../components/Botoes'
 import { EscolherVend } from '../components/EscolherVend'
@@ -37,7 +37,6 @@ const FetchData = () => {
     try {
       setLoading(true);
       const response = await api_db.get(`/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${selectedDates.startDate}/${selectedDates.endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}`);
-      console.log('API_URL:', response )
 
       setData(response.data);
       toast.success('Vendas obtidas com sucesso!')
@@ -240,12 +239,12 @@ const FetchData = () => {
                 <Cell dataKey="codigo_cliente" />
               </Column>
 
-              <Column flexGrow>
+              <Column flexGrow={400}>
                 <HeaderCell>NOME CLIENTE</HeaderCell>
                 <Cell dataKey="nome_cliente" />
               </Column>
 
-              <Column flexGrow>
+              <Column flexGrow={400}>
                 <HeaderCell>STATUS PEDIDO</HeaderCell>
                 <Cell dataKey="status" />
               </Column>
