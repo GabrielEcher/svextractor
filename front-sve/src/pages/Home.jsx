@@ -186,7 +186,7 @@ const FetchData = () => {
           ></ToastContainer>
 
         </Header>
-        <Container style={{ display: 'flex', flexDirection: 'column', width: '100%', marginLeft: '15px', }}>
+        <Container style={{ display: 'flex', flexDirection: 'column', width: '100%', marginLeft: '0.5%', }}>
 
           <Content style={{ width: '100%', maxWidth: '1490px' }}>
 
@@ -201,16 +201,18 @@ const FetchData = () => {
             </div>
 
             {/* Segunda linha */}
-            <div className="inputs" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', gap: '20px' }}>
+            <div className="inputs" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', gap: '20px', marginRight: '0%' }}>
 
               <EscolherTop onChange={handleTopChange} />
               <EscolherStatus onChange={handleStatusChange} />
               <EscolherData onDatesSelected={handleDatesSelected} />
-              <div className="buttons" style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+              
+              <div className="buttons" style={{ display: 'flex', gap: '10px', marginBottom: '10px'}}>
                 <BuscarDados onClick={buscarDadosClick} />
                 <GerarRelatorio onClick={gerarRelatorioClick} />
                 <CleanButton onClick={handleReload} />
               </div>
+
             </div>
           </Content>
 
@@ -270,7 +272,9 @@ const FetchData = () => {
 
           </Content>
         </Container>
-        <Footer style={{ marginTop: '5px', textAlign: 'left', marginRight: '1100px', color: '', marginLeft: '15px' }}>SVExtractor - v1.0.0 <link rel="stylesheet" href="" /></Footer>
+
+        <Footer style={{ marginTop: '5px', textAlign: 'left', marginLeft: '10px' }}>SVExtractor - v1.0.0</Footer>
+        
       </Container>
     </div>
   );

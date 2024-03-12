@@ -7,6 +7,7 @@ import LinkedinIcon from '@rsuite/icons/legacy/Linkedin';
 import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 import EmailIcon from '@rsuite/icons/Email';
 import { FaGithub, FaKey } from 'react-icons/fa'
+import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
 
 function Login() {
   const [username, setUsername] = useState();
@@ -36,20 +37,39 @@ function Login() {
     setShouldSignIn(true);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleLogin(event);
+    }
+  }
+
 
   if (!authenticated) {
     return (
+      <>
+      
+      
+      
       <div className="login"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#E8E8E8', }}>
-
         <Container style={{ width: '400px' }}>
           <Content>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#E8E8E8', marginTop: ''}}>
+                  <Link 
+                  to={'https://diamaju.com.br/'} 
+                  target='_blank'>
+                  <img 
+                  style={{width: '250px',}}
+                  src="https://diamaju.com.br/uploads/config/123/logo.png" alt="" />
+                  </Link>
+              </div>
             <FlexboxGrid justify="center">
               <FlexboxGrid.Item colspan={12}>
-                <Panel header={<h3>Login</h3>} bordered
+                <img src="" alt="" />
+                <Panel header={<h3><img style={{ width: '35px'}}src="../images/logo_svextractor_notext.ico" alt="" /> Login</h3>} bordered 
 
                   style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '10px', }}>
-                  <Form layout='vertical' key={renderKey}>
+                  <Form layout='vertical' key={renderKey} onKeyPress={handleKeyPress}> 
                     <Form.ControlLabel>Digite seu e-mail</Form.ControlLabel>
                     <InputGroup size='lg' >
                       <InputGroup.Addon>
@@ -80,7 +100,7 @@ function Login() {
                       )}
                       <hr />
                       <ButtonToolbar>
-                        <Button style={{ width: '350px' }} size="lg" color="green" appearance="primary" type="button" onClick={handleLogin} >Entrar</Button>
+                        <Button style={{ width: '350px' }} size="lg" color="green" appearance="primary" type="button" onClick={handleLogin}>Entrar</Button>
                       </ButtonToolbar>
                     </Form.Group>
                   </Form>
@@ -88,8 +108,14 @@ function Login() {
               </FlexboxGrid.Item>
             </FlexboxGrid>
           </Content>
-          <Footer style={{ textAlign: 'center', marginTop: '20px' }}>
+          <Footer style={{ textAlign: 'center', marginTop: '5px' }}>
             <FlexboxGrid justify="center">
+            <Link 
+            style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', textAlign: 'center', margin: 'auto', display: 'block',}} 
+            to={'https://diamaju.com.br/politica-de-privacidade'} 
+            target='_blank' >
+            Diamaju - Política de privacidade
+            </Link>
               <FlexboxGrid.Item>
                 <IconButton
                   href='https://github.com/GabrielEcher'
@@ -109,11 +135,13 @@ function Login() {
                 <a href="https://chamados.diamaju.com.br/" target="_blank" rel="noopener noreferrer">
                   <HelpOutlineIcon width={35} style={{ fontSize: '30' }} />
                 </a>
+                
               </FlexboxGrid.Item>
             </FlexboxGrid>
           </Footer>
         </Container>
       </div>
+      </>
     )
   } else if (authenticated) {
     return <Navigate to="/home" />
