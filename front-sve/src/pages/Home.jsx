@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs'
 import { useState } from 'react'
-import { Container, Header, Content, Footer, Table, Pagination } from 'rsuite';
+import { Container, Header, Content, Footer, Table } from 'rsuite';
 import { toast, ToastContainer } from 'react-toastify';
 import { BuscarDados, GerarRelatorio, LogoutButton, CleanButton, SkypeButton, WppButton } from '../components/Botoes'
 import { EscolherVend } from '../components/EscolherVend'
@@ -267,8 +267,6 @@ const FetchData = () => {
                 <Cell dataKey="nome_cidade" />
               </Column>
             </Table>
-            <Pagination limit={20} />
-
 
           </Content>
         </Container>
