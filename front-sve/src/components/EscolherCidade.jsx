@@ -43,7 +43,7 @@ export const EscolherCidade  = ( {onChange} ) => {
     
       return (
           <SelectPicker
-          style={{ width: '200px' }}
+          style={{ width: '16%', }}
           virtualized
           onSelect={handleCidChange}
           size='lg'

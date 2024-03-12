@@ -47,8 +47,8 @@ export const EscolherTop = ({ onChange }) => {
   return (
     <>
       <SelectPicker
-        listProps={{ style: { width: '440px' } }}
-        style={{ width: '200px', }}
+        listProps={{ style: { width: '480px' } }}
+        style={{ width: '25%', }}
         virtualized
         onSelect={handleTopChange}
         size='lg'

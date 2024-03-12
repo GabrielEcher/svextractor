@@ -47,7 +47,7 @@ export const EscolherCliente = ({ onChange }) => {
   return (
     <SelectPicker
     listProps={{ style: { width: '550px' } }}
-    style={{ width: '200px' }}
+    style={{ width: '16%', }}
     virtualized
     onSelect={handleClienteChange}
     size='lg'

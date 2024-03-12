@@ -44,7 +44,7 @@ const EscolherData = ({ onDatesSelected }) => {
           placement="bottomEnd"
           size='lg'
           oneTap
-          style={{marginRight: '5px'}}
+          style={{marginRight: '5px', }}
         />
       </div>
       <div>

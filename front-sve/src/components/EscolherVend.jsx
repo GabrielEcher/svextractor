@@ -46,7 +46,7 @@ export const EscolherVend = ({ onChange }) => {
   return (
     <SelectPicker
       listProps={{ style: { width: '430px' } }}
-      style={{ width: '200px', }}
+      style={{ width: '16%', }}
       virtualized
       onSelect={handleVendChange}
       size='lg'

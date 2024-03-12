@@ -24,8 +24,8 @@ export const EscolherStatus = ({ onChange, onClean }) => {
     return (
         <>
             <SelectPicker
-                listProps={{ style: { width: '430px', height: '250px' } }}
-                style={{ width: '200px', }}
+                listProps={{ style: { width: '480px', height: '250px' } }}
+                style={{ width: '23%', }}
                 virtualized
                 onSelect={handleStatusChange}
                 size='lg'

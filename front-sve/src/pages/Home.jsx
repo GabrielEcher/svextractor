@@ -216,13 +216,14 @@ const FetchData = () => {
             </div>
           </Content>
 
-          <Content style={{ width: '100%', }}>
+          <Content>
             <Table
-              virtualized height={470}
+              virtualized height={750}
+              affixHorizontalScrollbar
+              defaultExpandAllRows
               data={data}
               cellBordered
               loading={loading}
-              affixHorizontalScrollbar
             >
               <Column width={108}>
                 <HeaderCell>CÓD NEWSALES</HeaderCell>
@@ -239,12 +240,12 @@ const FetchData = () => {
                 <Cell dataKey="codigo_cliente" />
               </Column>
 
-              <Column width={250}>
+              <Column flexGrow>
                 <HeaderCell>NOME CLIENTE</HeaderCell>
                 <Cell dataKey="nome_cliente" />
               </Column>
 
-              <Column width={250}>
+              <Column flexGrow>
                 <HeaderCell>STATUS PEDIDO</HeaderCell>
                 <Cell dataKey="status" />
               </Column>
@@ -269,13 +270,10 @@ const FetchData = () => {
                 <Cell dataKey="nome_cidade" />
               </Column>
             </Table>
-
           </Content>
         </Container>
-
-        <Footer style={{ marginTop: '5px', textAlign: 'left', marginLeft: '10px' }}>SVExtractor - v1.0.0</Footer>
-
       </Container>
+      
     </div>
   );
 };

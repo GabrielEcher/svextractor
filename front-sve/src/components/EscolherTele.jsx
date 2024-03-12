@@ -56,7 +56,7 @@ export const EscolherTele = ({onChange}) => {
       return (
         <SelectPicker
         listProps={{ style: { width: '430px' } }}
-        style={{ width: '200px', }}
+        style={{ width: '16%', }}
         virtualized
         onSelect={handleTelevendasChange}
         size='lg'

@@ -46,7 +46,7 @@ export const EscolherMarca = ({ onChange }) => {
   return (
     <>
       <SelectPicker
-        style={{ width: '200px' }}
+        style={{ width: '16%', }}
         virtualized
         onSelect={handleMarcaChange}
         size='lg'
