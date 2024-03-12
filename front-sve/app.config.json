@@ -4,7 +4,7 @@
       "name"      : "svextractor",
       "script"    : "npx",
       "interpreter" : "none",
-      "args": "serve -s build -p 5173"
+      "args": "serve -s dist -p 5173"
     }
   ]
 }
