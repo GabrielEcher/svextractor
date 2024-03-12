@@ -13,7 +13,7 @@ const EscolherCodProd = ({onChange}) => {
     };
 
     const styles = {
-      width: '16%',
+      width: '18%',
       marginBottom: 10
     };
     
