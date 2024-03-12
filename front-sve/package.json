@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://svextractor.diamaju.com.br/",
   "scripts": {
     "start": "vite --port 5173",
     "dev": "vite",
