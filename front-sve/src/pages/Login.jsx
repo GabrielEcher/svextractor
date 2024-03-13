@@ -7,7 +7,6 @@ import LinkedinIcon from '@rsuite/icons/legacy/Linkedin';
 import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 import EmailIcon from '@rsuite/icons/Email';
 import { FaGithub, FaKey } from 'react-icons/fa'
-import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
 
 function Login() {
   const [username, setUsername] = useState();
@@ -47,9 +46,6 @@ function Login() {
   if (!authenticated) {
     return (
       <>
-      
-      
-      
       <div className="login"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#E8E8E8', }}>
         <Container style={{ width: '400px' }}>
@@ -66,7 +62,7 @@ function Login() {
             <FlexboxGrid justify="center">
               <FlexboxGrid.Item colspan={12}>
                 <img src="" alt="" />
-                <Panel header={<h3><img style={{ width: '35px'}}src="../images/logo_svextractor_notext.ico" alt="" /> Login</h3>} bordered 
+                <Panel header={<h3><img style={{ width: '35px'}}src="./logo_svextractor_notext.ico" alt="" /> Login</h3>} bordered 
 
                   style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '10px', }}>
                   <Form layout='vertical' key={renderKey} onKeyPress={handleKeyPress}> 

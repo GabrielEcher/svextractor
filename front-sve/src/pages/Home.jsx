@@ -159,7 +159,7 @@ const FetchData = () => {
           <h1
             style={{ paddingLeft: '7px', color: 'white', }}>
             <Link onClick to={"/home"}>
-              <img src="./images/logo_white.png"
+              <img src="./logo_white.png"
                 width="60px"
                 alt="" />
             </Link> Sales Vision Extractor
