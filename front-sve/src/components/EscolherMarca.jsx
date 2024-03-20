@@ -47,7 +47,7 @@ export const EscolherMarca = () => {
 
   const options = [
     ...data.map((marca) => ({
-      value: parseInt(marca.marca.match(/\d{1,7}/), 10),
+      value: parseInt(marca.marca.match(/\d{1,4}/), 10),
       label: marca.marca
     }))
   ]
