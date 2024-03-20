@@ -36,8 +36,8 @@ export const EscolherStatus = () => {
         <Select
             notFoundContent="0 resultados"
             size='middle'
-            style={{ width: '25%' }}
-            placeholder='Selecione o status do pedido:'
+            style={{ width: '25%', }}
+            placeholder='Status pedido'
             options={options}
             mode='multiple'
             onChange={handleStatusChange}

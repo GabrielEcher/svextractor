@@ -47,8 +47,8 @@ export const EscolherMarca = () => {
 
   const options = [
     ...data.map((marca) => ({
-      value: marca.codigo_marca,
-      label: marca.nome_marca
+      value: parseInt(marca.marca.match(/\d{1,7}/), 10),
+      label: marca.marca
     }))
   ]
   
@@ -59,7 +59,7 @@ export const EscolherMarca = () => {
           loading={loading}
           size='middle'
           style={{ width: '25%',  }}
-          placeholder='Selecione a marca:'
+          placeholder='Marca/Código'
           options={options}
           mode='multiple'
           onFocus={handleMarcaMenuOpen}

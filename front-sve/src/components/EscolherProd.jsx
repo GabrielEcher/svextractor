@@ -66,7 +66,7 @@ export const EscolherProd = () => {
       loading={loading}
       size='middle'
       style={{ width: '25%' }}
-      placeholder='Selecione o produto:'
+      placeholder='Produto/Código'
       options={filteredOptions.map((produtos) => ({
         value: parseInt(produtos.prod.match(/\d{1,7}/), 10),
         label: produtos.prod

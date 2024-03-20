@@ -68,7 +68,7 @@ export const EscolherCliente = () => {
       loading={loading}
       size='middle'
       style={{ width: '25%', }}
-      placeholder='Selecione o cliente:'
+      placeholder='Cliente/Código'
       options={filteredOptions.map((clientes) => ({
         value: parseInt(clientes.cliente.replace(/\D/g, ''), 10),
         label: clientes.cliente

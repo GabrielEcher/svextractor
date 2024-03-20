@@ -59,7 +59,7 @@ export const EscolherCidade = () => {
       loading={loading}
       size='middle'
       style={{ width: '25%', }}
-      placeholder='Selecione a cidade:'
+      placeholder='Cidade'
       options={options}
       mode='multiple'
       onFocus={handleCidMenuOpen}

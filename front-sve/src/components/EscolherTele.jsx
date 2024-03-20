@@ -60,7 +60,7 @@ export const EscolherTele = () => {
           loading={loading}
           size='middle'
           style={{ width: '25%',  }}
-          placeholder='Selecione o televendas:'
+          placeholder='Televendas'
           options={options}
           mode='multiple'
           onFocus={handleTelevendasMenuOpen}

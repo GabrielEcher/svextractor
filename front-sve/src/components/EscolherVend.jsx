@@ -58,7 +58,7 @@ export const EscolherVend = () => {
       loading={loading}
       size='middle'
       style={{ width: '25%',  }}
-      placeholder='Selecione o vendedor:'
+      placeholder='Vendedor'
       options={options}
       mode='multiple'
       onFocus={handleVendedorMenuOpen}

@@ -59,7 +59,7 @@ export const EscolherTop = () => {
       loading={loading}
       size='middle'
       style={{ width: '25%', }}
-      placeholder='Selecione a top:'
+      placeholder='Operação'
       options={options}
       mode='multiple'
       onFocus={handleTopMenuOpen}

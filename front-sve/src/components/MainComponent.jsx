@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 const { Header, Footer, Content } = Layout;
 import { BuscarDados, GerarRelatorio, CleanButton, SkypeButton, WppButton, LogoutButton } from './Botoes'
 import { EscolherVend } from './EscolherVend'
@@ -11,6 +11,7 @@ import { EscolherMarca } from './EscolherMarca'
 import { EscolherProd } from './EscolherProd'
 import { EscolherStatus } from './EscolherStatus';
 import { EscolherCidade } from './EscolherCidade';
+import { MenuLateral } from './Menu';
 import { StatusButton } from '../services/CheckAPI';
 import { Link } from 'react-router-dom';
 import { TableData } from './Table';

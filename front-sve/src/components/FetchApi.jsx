@@ -25,11 +25,11 @@ export function useFetchApi() {
             setData(response.data);
 
             toast.success('Vendas obtidas com sucesso!');
-            toast.info('Ao exportar o relatório o download iniciará automaticamente.');
+            
             setLoading(false);
         } catch (error) {
             if (error.request.status === 404) {
-                toast.error('ERRO:404 Erro ao consultar dados, verifique os campos preenchidos!');
+                toast.error('ERRO:404 Erro ao consultar dados, verifique os campos preenchidos! **Os campos de data devem ser preenchidos**');
             } else if (error.request.status === 0) {
                 toast.error('ERRO:500/0. Problema ao comunicar-se com a API, acione o suporte!');
             }
