@@ -1,42 +1,47 @@
 /* eslint-disable no-unused-vars */
-import BranchIcon from '@rsuite/icons/Branch';
-import { IconButton, Whisper, Tooltip } from 'rsuite';
+import { DisconnectOutlined, ApiOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { api_db } from '../services/api'
+import { Button, Tooltip } from 'antd';
 
 export const StatusButton = () => {
     const [apiStatus, setApiStatus] = useState('')
-    const [tooltipText, setTooltipText] = useState('')
-
-    const tooltipApi = (
-        <Tooltip>
-            {tooltipText}
-        </Tooltip>
-    )
-
+    
     useEffect(() => {
         async function checkApi() {
             try {
                 const response = await api_db.get("/status")
-                setTooltipText('Serviço de busca do SVExtractor está online')
-                setApiStatus('greenyellow')
+                setApiStatus(response.status)
             } catch (err) {
-                setTooltipText('Serviço de busca do SVExtractor está offline')
-                setApiStatus('red')
+                setApiStatus('500')
             }
         } checkApi();
-    },[])
+    }, [])
 
-    
     return (
-        <Whisper trigger={'hover'} speaker={tooltipApi} placement='bottom' followCursor>
-            <IconButton
-            icon={<BranchIcon size='' />}
-            size="lg"
-            style={{ position: 'absolute', top: '14px', right: '14px', borderRadius: '15px', width: '40px', height: '35px', color: apiStatus }}
-            appearance="subtle"
-        />
-        </Whisper>
-        
+        <Tooltip title={apiStatus === 200 ? "Serviço de busca está online!" : "Serviço de busca está offline!"}
+            color={apiStatus === 200 ? 'green' : 'red'}
+            placement='left'>
+            <Button
+                size="lg"
+                icon={<span
+                    style={{ lineHeight: '30px', textAlign: 'center' }}>
+                    {apiStatus === 200 ? <ApiOutlined /> : <DisconnectOutlined />}
+                </span>}
+                style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '135px',
+                    color: apiStatus === 200 ? 'yellowgreen' : 'red',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '30px',
+                    height: '30px',
+                    padding: 0,
+                }}
+                type="primary"
+                shape='circle' />
+        </Tooltip>
+
     )
 }

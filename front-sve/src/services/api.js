@@ -5,7 +5,7 @@ export const api_db = new axios.create({
 })
 
 export const api_auth = new axios.create({
-    baseURL: "https://svextractor.diamaju.com.br"
+    baseURL: "https://svextractor.diamaju.com.br/auth/"
 })
 
 

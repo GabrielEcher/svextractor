@@ -1,21 +1,23 @@
 import ExcelJS from 'exceljs'
-import { useState } from 'react'
-import { Container, Header, Content, Table } from 'rsuite';
+import { useState, createContext} from 'react'
+
 import { toast, ToastContainer } from 'react-toastify';
 import { BuscarDados, GerarRelatorio, LogoutButton, CleanButton, SkypeButton, WppButton } from '../components/Botoes'
 import { EscolherVend } from '../components/EscolherVend'
 import { EscolherCliente } from '../components/EscolherCliente'
 import { EscolherTele } from '../components/EscolherTele'
-import EscolherData from '../components/EscolherData'
+import {EscolherData} from '../components/EscolherData'
 import { EscolherTop } from '../components/EscolherTop'
 import { EscolherMarca } from '../components/EscolherMarca'
-import EscolherCodProd from '../components/EscolherProd'
+import {EscolherProd} from '../components/EscolherProd'
 import { EscolherStatus } from '../components/EscolherStatus';
 import { EscolherCidade } from '../components/EscolherCidade';
 import { api_db } from '../services/api'
 import { StatusButton } from '../services/CheckAPI';
 import { Link } from 'react-router-dom';
-const { Column, HeaderCell, Cell } = Table;
+
+
+
 
 const FetchData = () => {
   const [data, setData] = useState([]);
@@ -23,20 +25,20 @@ const FetchData = () => {
   const [selectedVendedor, setSelectedVendedor] = useState(null);
   const [selectedTelevendas, setSelectedTelevendas] = useState(null);
   const [codigoCliente, setCodigoCliente] = useState(null)
-  const [selectedDates, setSelectedDates] = useState({});
   const [selectedTop, setSelectedTop] = useState(null)
   const [selectedMarca, setSelectedMarca] = useState(null);
   const [codigoProd, setCodigoProd] = useState(null)
   const [selectedStatus, setSelectedStatus] = useState(null)
   const [selectedCid, setSelectedCid] = useState(null)
   const [exporting, setExporting] = useState(false);
-
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   async function fetchDataApi() {
 
     try {
       setLoading(true);
-      const response = await api_db.get(`/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${selectedDates.startDate}/${selectedDates.endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}`);
+      const response = await api_db.get(`/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${startDate}/${endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}`);
 
       setData(response.data);
       toast.success('Vendas obtidas com sucesso!')
@@ -122,10 +124,6 @@ const FetchData = () => {
     setCodigoProd(value);
   };
 
-  const handleDatesSelected = (dates) => {
-    setSelectedDates(dates);
-  };
-
   const handleTopChange = (value) => {
     setSelectedTop(value);
   };
@@ -187,12 +185,12 @@ const FetchData = () => {
         </Header>
         <Container style={{ display: 'flex', flexDirection: 'column', width: '100%', }}>
 
-          <Content style={{ width: '100%',}}>
+          <Content style={{ width: '100%', }}>
 
             {/* Primeira linha */}
             <div className="inputs" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
               <EscolherCliente onChange={handleClienteChange} />
-              <EscolherCodProd onChange={handleProdChange} />
+              <EscolherProd onChange={handleProdChange} />
               <EscolherVend onChange={handleVendedorChange} />
               <EscolherTele onChange={handleTelevendasChange} />
               <EscolherMarca onChange={handleMarcaChange} />
@@ -204,9 +202,9 @@ const FetchData = () => {
 
               <EscolherTop onChange={handleTopChange} />
               <EscolherStatus onChange={handleStatusChange} />
-              <EscolherData onDatesSelected={handleDatesSelected} />
-              
-              <div className="buttons" style={{ display: 'flex', gap: '10px', marginBottom: '10px'}}>
+              <EscolherData />
+
+              <div className="buttons" style={{ display: 'flex', gap: '10px', marginBottom: '10px', position: 'sticky' }}>
                 <BuscarDados onClick={buscarDadosClick} />
                 <GerarRelatorio onClick={gerarRelatorioClick} />
                 <CleanButton onClick={handleReload} />
@@ -215,39 +213,14 @@ const FetchData = () => {
             </div>
           </Content>
 
-          <Content>
+          <Content style={{ width: '100%', position: 'sticky' }}>
             <Table
               virtualized height={750}
               affixHorizontalScrollbar
-              defaultExpandAllRows
               data={data}
               cellBordered
               loading={loading}
             >
-              <Column width={108}>
-                <HeaderCell>CÓD NEWSALES</HeaderCell>
-                <Cell dataKey="codigo_newsales" />
-              </Column>
-
-              <Column width={100}>
-                <HeaderCell>CÓDIGO ERP</HeaderCell>
-                <Cell dataKey="codigo_pedido_erp" />
-              </Column>
-
-              <Column width={100}>
-                <HeaderCell>CÓD CLIENTE</HeaderCell>
-                <Cell dataKey="codigo_cliente" />
-              </Column>
-
-              <Column flexGrow={400}>
-                <HeaderCell>NOME CLIENTE</HeaderCell>
-                <Cell dataKey="nome_cliente" />
-              </Column>
-
-              <Column flexGrow={400}>
-                <HeaderCell>STATUS PEDIDO</HeaderCell>
-                <Cell dataKey="status" />
-              </Column>
 
               <Column width={320}>
                 <HeaderCell>VENDEDOR</HeaderCell>
@@ -259,20 +232,46 @@ const FetchData = () => {
                 <Cell dataKey="nome_vendedor_2" />
               </Column>
 
+              <Column width={108}>
+                <HeaderCell>CÓD NEWSALES</HeaderCell>
+                <Cell dataKey="codigo_newsales" />
+              </Column>
+
+              <Column width={100}>
+                <HeaderCell>CÓDIGO ERP</HeaderCell>
+                <Cell dataKey="codigo_pedido_erp" />
+              </Column>
+
               <Column width={200}>
                 <HeaderCell>OPERAÇÃO</HeaderCell>
                 <Cell dataKey="nome_operacao" />
+              </Column>
+
+              <Column width={200}>
+                <HeaderCell flexGrow={400}>STATUS PEDIDO</HeaderCell>
+                <Cell dataKey="status" />
+              </Column>
+
+              <Column width={100}>
+                <HeaderCell>CÓD CLIENTE</HeaderCell>
+                <Cell dataKey="codigo_cliente" />
+              </Column>
+
+              <Column width={200}>
+                <HeaderCell>NOME CLIENTE</HeaderCell>
+                <Cell dataKey="nome_cliente" />
               </Column>
 
               <Column width={250}>
                 <HeaderCell>CIDADE</HeaderCell>
                 <Cell dataKey="nome_cidade" />
               </Column>
+              
             </Table>
           </Content>
         </Container>
       </Container>
-      
+
     </div>
   );
 };

@@ -23,22 +23,21 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async ({ username, password }) => {
     try {
-      const result = await api_auth.post("/auth/token", { username, password }, {
+      const result = await api_auth.post("/token", { username, password }, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      
       localStorage.setItem('Bearer.Token', result.data.access_token)
       localStorage.setItem('User.ID', result.data.codvend)
       document.cookie = `ApiStatusContext=${result.status}`
-
+      
       setApiStatus(null);
       setUser(true);
       
 
     } catch (err) {
-      console.log(err.response.status);
+      setApiStatus(err.response.status);
 
       if (err.response) {
         setApiStatus(err.response.data.detail)
@@ -51,8 +50,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.clear('Bearer.Token')
     setUser(null);
     document.cookie = `ApiStatusContext=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-
     return <Navigate to="/" />;
+    
   };
 
   return (

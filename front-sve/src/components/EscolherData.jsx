@@ -1,71 +1,39 @@
-import  { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { format } from 'date-fns';
-import DatePicker from 'rsuite/DatePicker';  
+import { DatePicker } from 'antd';
+import locale from 'antd/es/date-picker/locale/pt_BR';
+import {enUS} from 'date-fns/locale'
+import { DataContext } from '../context/DataContext';
+const { RangePicker } = DatePicker;
 
-// eslint-disable-next-line react/prop-types
-const EscolherData = ({ onDatesSelected }) => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+export const EscolherData = () => {
+  const [dateRange, setDateRange] = useState([]);
+  const {setStartDate, setEndDate} = useContext(DataContext);
 
-  const handleDateChange = () => {
-    onDatesSelected({
-      startDate: startDate ? format(startDate, 'dd-MMM-yy',) : null,
-      endDate: endDate ? format(endDate, 'dd-MMM-yy',) : null,
-    });
-  };
+  const handleDateChange = (dates) => {
+    setDateRange(dates)
+    
+    if (dates && dates.length === 2) {
+      const formattedStartDate = format(new Date(dates[0]), 'dd-MMM-yy', { locale: enUS });
+      const formattedEndDate = format(new Date(dates[1]), 'dd-MMM-yy', { locale: enUS });
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-  };
+      setStartDate(formattedStartDate);
+      setEndDate(formattedEndDate);
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
-
-  const handleStartDateBlur = () => {
-    handleDateChange();
-  };
-
-  const handleEndDateBlur = () => {
-    handleDateChange();
-  };
+  }
+    
+  }
 
   return (
-    <>
-      <div>
-        <DatePicker
-          value={startDate}
-          onChange={handleStartDateChange}
-          onBlur={handleStartDateBlur}
-          startdate={startDate}
-          enddate={endDate}
-          format='dd/MM/yyyy'
-          placeholder='Data inicial:'
-          placement="bottomEnd"
-          size='lg'
-          oneTap
-          style={{marginRight: '5px', }}
-        />
-      </div>
-      <div>
-        <DatePicker
-          value={endDate}
-          onChange={handleEndDateChange}
-          onBlur={handleEndDateBlur}
-          startdate={startDate}
-          enddate={endDate}
-          format='dd/MM/yyyy'
-          placeholder='Data final:'
-          shouldDisableDate={(date) => date < startDate}
-          placement="bottomEnd"
-          size='lg'
-          oneTap
-          style={{marginRight: '5px'}}
-        />
+    <RangePicker
+      showWeek
+      showNow
+      format={'DD/MM/YYYY'}
+      locale={locale}
+      onChange={handleDateChange} 
 
-      </div>
-    </>
+    />
   );
 };
 
-export default EscolherData;
+

@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
-import { SelectPicker } from 'rsuite';
-
+import { Select } from 'antd'
+import { DataContext } from '../context/DataContext';
 
 // eslint-disable-next-line react/prop-types
-export const EscolherMarca = ({ onChange }) => {
+export const EscolherMarca = () => {
   const [data, setData] = useState([])
   const [isApiCalled, setIsApiCalled] = useState(false)
   const [loading, setLoading] = useState(false)
+  const {selectedMarca, setSelectedMarca} = useContext(DataContext);
 
   async function fetchMarcaApi() {
     try {
@@ -18,14 +19,12 @@ export const EscolherMarca = ({ onChange }) => {
     } catch (error) {
       console.error(error);
     }
-
   }
-  const [selectedMarca, setSelectedMarca] = useState(null);
 
-  const handleMarcaChange = (value, item, event) => {
+  const handleMarcaChange = (value) => {
     const selectedValue = value !== 'null' ? value : null;
-    setSelectedMarca(selectedValue); // Atribui o valor escolhido à variavel
-    onChange(selectedValue); // Ao mudar, o valor selecionado recebe o valor
+    setSelectedMarca(selectedValue); 
+    
   };
   const handleMarcaMenuOpen = () => {
     // verifica se a chamada à API já foi feita
@@ -36,26 +35,40 @@ export const EscolherMarca = ({ onChange }) => {
     }
   };
 
+  const handleDeselect = (value) => {
+    const updatedSelectedMarca = selectedMarca.filter(item => item !== value);
+
+    if (updatedSelectedMarca.length === 0) {
+      setSelectedMarca(null);
+    } else {
+      setSelectedMarca(updatedSelectedMarca);
+    }
+  };
+
   const options = [
-    { value: 'null', label: 'TODAS' },
     ...data.map((marca) => ({
       value: marca.codigo_marca,
       label: marca.nome_marca
     }))
   ]
+  
   return (
-    <>
-      <SelectPicker
-        style={{ width: '16%', }}
-        virtualized
-        onSelect={handleMarcaChange}
-        size='lg'
-        data={options}
-        placeholder="Marca do produto: "
-        onOpen={handleMarcaMenuOpen}
-        value={selectedMarca}
-        loading={loading}
-      />
-    </>
+    <Select
+          virtual
+          notFoundContent="0 resultados"
+          loading={loading}
+          size='middle'
+          style={{ width: '25%',  }}
+          placeholder='Selecione a marca:'
+          options={options}
+          mode='multiple'
+          onFocus={handleMarcaMenuOpen}
+          onChange={handleMarcaChange}
+          onDeselect={handleDeselect}
+          filterOption={(input, option) =>
+            option.label.toLowerCase().includes(input.toLowerCase()) || 
+            option.value.toString().includes(input)
+          }
+        />
   )
 }

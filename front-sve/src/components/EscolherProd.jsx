@@ -1,35 +1,83 @@
-import { useState } from "react";
-import { Input, InputGroup } from 'rsuite';
-import TagIcon from '@rsuite/icons/Tag';
+import { useContext, useState } from 'react';
+import { api_db } from "../services/api";
+import { Select } from 'antd';
+import { DataContext } from '../context/DataContext';
 
 // eslint-disable-next-line react/prop-types
-const EscolherCodProd = ({onChange}) => {
+export const EscolherProd = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { codigoProd, setCodigoProd } = useContext(DataContext);
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [isApiCalled, setIsApiCalled] = useState(false)
 
-    const [codigoProd, setCodigoProd] = useState(null)
+  const handleProdMenuOpen = () => {
+    // verifica se a chamada à API já foi feita
+    if (!isApiCalled) {
+      fetchTopApi();
+      setLoading(true)
+      setIsApiCalled(true);
+      
+    }
+  };
 
-    const handleProdChange = (value) => {
-      setCodigoProd(value);
-      onChange(value);
-    };
+  async function fetchTopApi() {
+      try {
+        setLoading(true);
+        const response = await api_db.get('/produtos');
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-    const styles = {
-      width: '20%',
-      marginBottom: 10
-    };
-    
-    return (
-      <InputGroup inside style={styles}>
-      <InputGroup.Addon>
-        <TagIcon/>
-      </InputGroup.Addon>
-      <Input
-        placeholder="Informe o código do produto:"
-        size="lg"
-        defaultValue={null}
-        onChange={handleProdChange}
-      />
-    </InputGroup>
-    )
+  const handleSearch = (value) => {
+    setSearchValue(value);
+
+    const filtered = data.filter(produtos => produtos.prod.toLowerCase().includes(value.toLowerCase()));
+    setFilteredOptions(filtered);
+  };
+
+  const handleProdChange = (value) => {
+    setCodigoProd(value)
+  };
+
+  const handleDeselect = (value) => {
+    const updatedSelectedProd = codigoProd.filter(item => item !== value);
+    if (updatedSelectedProd.length === 0) {
+      setCodigoProd(null);
+  } else {
+    setCodigoProd(updatedSelectedProd); 
+  }};
+
+  const handleDropdownVisibleChange = (open) => {
+    if (!open) {
+      setFilteredOptions([]);
+    }
+  };
+
+  return (
+    <Select
+      virtual
+      notFoundContent="0 resultados"
+      popupMatchSelectWidth={400}
+      loading={loading}
+      size='middle'
+      style={{ width: '25%' }}
+      placeholder='Selecione o produto:'
+      options={filteredOptions.map((produtos) => ({
+        value: parseInt(produtos.prod.match(/\d{1,7}/), 10),
+        label: produtos.prod
+      }))}
+      mode='multiple'
+      onFocus={handleProdMenuOpen}
+      onChange={handleProdChange}
+      onDeselect={handleDeselect}
+      filterOption={false}
+      onSearch={handleSearch}
+      onDropdownVisibleChange={handleDropdownVisibleChange}
+    />
+  )
 }
-
-export default EscolherCodProd;

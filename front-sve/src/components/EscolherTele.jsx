@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
-import { SelectPicker } from 'rsuite';
-
+import { Select } from 'antd'
+import { DataContext } from '../context/DataContext';
 
 // eslint-disable-next-line react/prop-types
-export const EscolherTele = ({onChange}) => {
+export const EscolherTele = () => {
     const [data, setData] = useState([])
     const [isApiCalled, setIsApiCalled] = useState(false)
     const codvend = localStorage.getItem('User.ID')
-    const [selectedTelevendas, setSelectedTelevendas] = useState(codvend);
+    const {selectedTelevendas, setSelectedTelevendas} = useContext(DataContext);
     const [loading, setLoading] = useState(false)
     
     const fetchVendedores = async () => {
@@ -31,60 +31,49 @@ export const EscolherTele = ({onChange}) => {
       }
     };
       
-    const handleTelevendasChange = (value, item, event) => {
+    const handleTelevendasChange = (value) => {
       const selectedValue = value !== 'null' ? value : null;
-      setSelectedTelevendas(selectedValue); // Atribui o valor escolhido à variavel
-      onChange(selectedValue); // Ao mudar, o valor selecionado recebe o valor
+      setSelectedTelevendas(selectedValue); // Atribui o valor escolhido à variavel 
     };
- 
-    const options_all = [
-      {value: 'null', label: 'TODOS'},
-      ...data.map((televendas) => ({
-        value: televendas.codvend,
-        label: televendas.apelido
-      }))
-    ];
 
-    const options_one = [
+    const handleDeselect = (value) => {
+      const updatedSelectedVend = selectedTelevendas.filter(item => item !== value);
+  
+      if (updatedSelectedVend.length === 0) {
+        setSelectedTelevendas(null);
+      } else {
+        setSelectedTelevendas(updatedSelectedVend);
+      }
+    };
+
+    const options = [
       ...data.map((televendas) => ({
-        value: televendas.codvend,
-        label: televendas.apelido
+        value: parseInt(televendas.televendas.match(/\d{1,3}/), 10),
+        label: televendas.televendas
       }))
     ]
 
-    if (codvend === '0') {
       return (
-        <SelectPicker
-        listProps={{ style: { width: '430px' } }}
-        style={{ width: '16%', }}
-        virtualized
-        onSelect={handleTelevendasChange}
-        size='lg'
-        data={options_all}
-        placeholder={'Televendas:'}
-        onOpen={handleTelevendasMenuOpen}
-        value={selectedTelevendas}
-        loading={loading}
+        <Select
+        
+          notFoundContent="0 resultados"
+          loading={loading}
+          size='middle'
+          style={{ width: '25%',  }}
+          placeholder='Selecione o televendas:'
+          options={options}
+          mode='multiple'
+          onFocus={handleTelevendasMenuOpen}
+          onChange={handleTelevendasChange}
+          onDeselect={handleDeselect}
+          filterOption={(input, option) =>
+            option.label.toLowerCase().includes(input.toLowerCase()) || 
+            option.value.toString().includes(input)
+          }
         />
       )
-    } else {
-      return (
-        <SelectPicker
-        listProps={{ style: { width: '430px' } }}
-        style={{ width: '200px', }}
-        virtualized
-        onSelect={handleTelevendasChange}
-        size='lg'
-        data={options_one}
-        placeholder={'Televendas:'}
-        onOpen={handleTelevendasMenuOpen}
-        value={selectedTelevendas}
-        loading={loading}
-        />
-      )
-    }
-    
-}
+    } 
+
 
 
 

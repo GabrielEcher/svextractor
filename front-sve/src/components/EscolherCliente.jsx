@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
-import { SelectPicker } from 'rsuite';
+import { Select } from 'antd'
+import { DataContext } from '../context/DataContext';
 
-export const EscolherCliente = ({ onChange }) => {
+export const EscolherCliente = () => {
   const [data, setData] = useState([]);
-  const [codigoCliente, setCodigoCliente] = useState(null);
+  const { codigoCliente, setCodigoCliente } = useContext(DataContext);
   const [isApiCalled, setIsApiCalled] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredOptions, setFilteredOptions] = useState([]);
 
   const handleClienteMenuOpen = () => {
-    // verifica se a chamada à API já foi feita
     if (!isApiCalled) {
       fetchClienteApi();
       setLoading(true)
@@ -30,33 +32,58 @@ export const EscolherCliente = ({ onChange }) => {
 
   }
 
-  const handleClienteChange = (value, item, event) => {
+  const handleClienteChange = (value) => {
     const selectedValue = value !== 'null' ? value : null;
-    setCodigoCliente(selectedValue); // Atribui o valor escolhido à variavel
-    onChange(selectedValue); // Ao mudar, o valor selecionado recebe o valor
+    setCodigoCliente(selectedValue);
   };
 
-  const options = [
-    { value: 'null', label: 'TODOS' },
-    ...data.map((cliente) => ({
-      value: cliente.codigo,
-      label: cliente.razao_social
-    }))
-  ]
+  const handleSearch = (value) => {
+    setSearchValue(value);
+
+    const filtered = data.filter(clientes => clientes.cliente.toLowerCase().includes(value.toLowerCase()));
+    setFilteredOptions(filtered);
+  };
+
+  const handleDeselect = (value) => {
+    const updatedSelectedProd = codigoCliente.filter(item => item !== value);
+
+    if (updatedSelectedProd.length === 0) {
+      setCodigoCliente(null);
+    } else {
+      setCodigoCliente(updatedSelectedProd);
+    }
+  };
+
+  const handleDropdownVisibleChange = (open) => {
+    if (!open) {
+      setFilteredOptions([]);
+    }
+  };
 
   return (
-    <SelectPicker
-    listProps={{ style: { width: '550px' } }}
-    style={{ width: '16%', }}
-    virtualized
-    onSelect={handleClienteChange}
-    size='lg'
-    data={options}
-    placeholder={'Cliente:'}
-    value={codigoCliente}
-    onOpen={handleClienteMenuOpen}
-    loading={loading}
-  />
+    <Select
+      notFoundContent="0 resultados"
+      popupMatchSelectWidth={450}
+      virtual
+      loading={loading}
+      size='middle'
+      style={{ width: '25%', }}
+      placeholder='Selecione o cliente:'
+      options={filteredOptions.map((clientes) => ({
+        value: parseInt(clientes.cliente.replace(/\D/g, ''), 10),
+        label: clientes.cliente
+      }))}
+      mode='multiple'
+      onFocus={handleClienteMenuOpen}
+      onChange={handleClienteChange}
+      onDeselect={handleDeselect}
+      filterOption={(input, option) =>
+        option.label.toLowerCase().includes(input.toLowerCase()) || 
+        option.value.toString().includes(input)
+      }
+      onDropdownVisibleChange={handleDropdownVisibleChange}
+      onSearch={handleSearch}
+    />
   )
 }
 

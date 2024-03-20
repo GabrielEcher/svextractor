@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { api_db } from "../services/api";
-import { SelectPicker } from 'rsuite';
-
+import { Select } from 'antd'
+import { DataContext } from '../context/DataContext';
 // eslint-disable-next-line react/prop-types
-export const EscolherVend = ({ onChange }) => {
+export const EscolherVend = () => {
   const [data, setData] = useState([])
   const [isApiCalled, setIsApiCalled] = useState(false)
-  const [selectedVendedor, setSelectedVendedor] = useState(null);
+  const {selectedVendedor, setSelectedVendedor} = useContext(DataContext);
   const [loading, setLoading] = useState(false)
 
   const fetchVendedores = async () => {
@@ -29,32 +29,45 @@ export const EscolherVend = ({ onChange }) => {
     }
   };
 
-  const handleVendChange = (value, item, event) => {
+  const handleVendChange = (value) => {
     const selectedValue = value !== 'null' ? value : null;
     setSelectedVendedor(selectedValue); // Atribui o valor escolhido à variavel
-    onChange(selectedValue); // Ao mudar, o valor selecionado recebe o valor
   };
   
+  const handleDeselect = (value) => {
+    const updatedSelectedVend = selectedVendedor.filter(item => item !== value);
+
+    if (updatedSelectedVend.length === 0) {
+      setSelectedVendedor(null);
+    } else {
+      setSelectedVendedor(updatedSelectedVend);
+    }
+  };
+
+
   const options = [
-    { value: 'null', label: 'SEM VENDEDOR' },
-    ...data.map((vendedor) => ({
-      value: vendedor.codvend,
-      label: vendedor.apelido
+    ...data.map((vend) => ({
+      value: parseInt(vend.vendedor.match(/\d{1,3}/), 10),
+      label: vend.vendedor
     }))
   ];
 
   return (
-    <SelectPicker
-      listProps={{ style: { width: '430px' } }}
-      style={{ width: '16%', }}
-      virtualized
-      onSelect={handleVendChange}
-      size='lg'
-      data={options}
-      placeholder={'Vendedor:'}
-      onOpen={handleVendedorMenuOpen}
-      value={selectedVendedor}
+    <Select
+      notFoundContent="0 resultados"
       loading={loading}
+      size='middle'
+      style={{ width: '25%',  }}
+      placeholder='Selecione o vendedor:'
+      options={options}
+      mode='multiple'
+      onFocus={handleVendedorMenuOpen}
+      onChange={handleVendChange}
+      onDeselect={handleDeselect}
+      filterOption={(input, option) =>
+        option.label.toLowerCase().includes(input.toLowerCase()) || 
+        option.value.toString().includes(input)
+      }
     />
   )
 }

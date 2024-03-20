@@ -1,42 +1,13 @@
 /* eslint-disable react/prop-types */
-import { Button, IconButton, Tooltip, Whisper } from 'rsuite';
-import SearchIcon from '@rsuite/icons/Search';
-import FileDownloadIcon from '@rsuite/icons/FileDownload';
-import CloseIcon from '@rsuite/icons/Close';
-import { FaWhatsapp, FaSkype } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
-import OffIcon from '@rsuite/icons/Off';
-
-const vendasIcon = <SearchIcon />
-const relatorioIcon = <FileDownloadIcon />
-
-const tooltipWpp = (
-    <Tooltip>
-        Clique se precisar de suporte no WhatsApp.
-    </Tooltip>
-)
-
-const tooltipLogout = (
-    <Tooltip>
-        Clique para fazer logoff.
-    </Tooltip>
-)
-const tooltipSkype = (
-    <Tooltip>
-        Clique se precisar de suporte no Skype (Gabriel).
-    </Tooltip>
-)
-
-const tooltipClean = (
-    <Tooltip>
-        Limpar dados buscados.
-    </Tooltip>
-)
+import { Button, Tooltip, } from 'antd'
+import { DeleteOutlined, SearchOutlined, DownloadOutlined, PoweroffOutlined, WhatsAppOutlined, SkypeOutlined } from '@ant-design/icons'
+import { DataContext } from '../context/DataContext';
 
 export const BuscarDados = ({ onClick }) => {
     return (
-        <Button color="blue" appearance="primary" size='lg' startIcon={vendasIcon} onClick={onClick}>
+        <Button color="blue" type="primary" size='large' icon={<SearchOutlined />} onClick={onClick}>
             Buscar vendas
         </Button>
     );
@@ -44,72 +15,109 @@ export const BuscarDados = ({ onClick }) => {
 
 export const GerarRelatorio = ({ onClick }) => {
     return (
-        <Button color="green" appearance="primary" size='lg' startIcon={relatorioIcon} onClick={onClick}>
+        <Button style={{ backgroundColor: 'green' }} icon={<DownloadOutlined />} type="primary" size='large' onClick={onClick} >
             Exportar relatório (xlsx)
         </Button>
     )
 }
 
-export const CleanButton = ({ onClick }) => {
+export const CleanButton = () => {
+    const { setData, } = useContext(DataContext);
+
+    const handleClick = () => {
+        setData([]);
+    };
 
     return (
-        <Whisper trigger={'hover'} speaker={tooltipClean} placement='bottom' followCursor>
-            <IconButton
-                icon={<CloseIcon />}
-                onClick={onClick}
-                appearance='primary'
-                size='md'
-            >
-            </IconButton>
-        </Whisper>
-
-    )
-}
+        <Tooltip title="Limpar dados buscados." color='red' placement="leftBottom">
+            <Button type='primary' size='large' icon={<DeleteOutlined />} onClick={handleClick} danger />
+        </Tooltip>
+    );
+};
 
 export const SkypeButton = () => {
     return (
-        <Whisper trigger={'hover'} speaker={tooltipSkype} placement='bottom' followCursor>
-            <IconButton
+        <Tooltip title="Clique para obter suporte no skype" color='blue'>
+            <Button
                 href='https://join.skype.com/invite/aTjYIjW8AdY5'
-                icon={<FaSkype size='' />}
+                icon={<span style={{ lineHeight: '30px', textAlign: 'center' }}>
+                    <SkypeOutlined />
+                </span>}
                 size="lg"
-                style={{ position: 'absolute', top: '14px', right: '108px', width: '40px', borderRadius: '15px', height: '35px', color: '#fff' }}
-                appearance="subtle"
+                style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '95px',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '30px',
+                    height: '30px',
+                    padding: 0,
+                }}
+                type="primary"
+                shape='circle'
                 target='_blank' />
-        </Whisper>
+        </Tooltip>
+
+
 
     )
 }
 export const WppButton = () => {
     return (
-        <Whisper trigger={'hover'} speaker={tooltipWpp} placement='bottom' followCursor>
-            <IconButton
+        <Tooltip title="Clique para obter suporte no WhatsApp" color='#25D366'>
+            <Button
                 href='https://wa.me/555198619089?text=Preciso%20de%20suporte%20para%20o%20SVExtractor!'
-                icon={<FaWhatsapp />}
-                size="lg"
-                style={{ position: 'absolute', top: '14px', right: '156px', width: '40px', borderRadius: '15px', height: '35px', color: '#fff', }}
-                appearance="subtle"
+                icon={<span style={{ lineHeight: '30px', textAlign: 'center' }}>
+                    <WhatsAppOutlined />
+                </span>}
+                type="primary"
+                style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '55px',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '30px',
+                    height: '30px',
+                    padding: 0,
+                }}
+                shape='circle'
                 target='_blank' />
-        </Whisper>
+        </Tooltip>
+
+
 
     )
 }
 export const LogoutButton = () => {
     const { signOut } = useContext(AuthContext)
     return (
-        <Whisper trigger={'hover'} speaker={tooltipLogout} placement='bottom' followCursor>
-            <IconButton
-                icon={<OffIcon />}
+        <Tooltip title="Sair do SVExtractor" color='gray'>
+            <Button
+                icon={<PoweroffOutlined />}
                 size="md"
-                style={{ position: 'absolute', top: '14px', right: '60px', width: '40px', borderRadius: '15px', height: '35px', color: '#fff' }}
-
-                appearance="subtle"
+                style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '15px',
+                    color: '#fff',
+                    backgroundColor: '',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '30px',
+                    height: '30px',
+                    padding: 0,
+                }}
+                type="primary"
+                shape='circle'
                 onClick={signOut} />
-        </Whisper>
+        </Tooltip>
+
 
     )
 }
-
-
 
 

@@ -1,13 +1,14 @@
-/* eslint-disable no-unused-vars */
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
-import { SelectPicker } from 'rsuite';
+import { Select } from 'antd'
+import { DataContext } from '../context/DataContext';
 
 // eslint-disable-next-line react/prop-types
-export const EscolherTop = ({ onChange }) => {
+export const EscolherTop = () => {
   const [data, setData] = useState([])
   const [isApiCalled, setIsApiCalled] = useState(false)
   const [loading, setLoading] = useState(false)
+  const {selectedTop, setSelectedTop} = useContext(DataContext);
 
   async function fetchTopApi() {
     try {
@@ -20,12 +21,10 @@ export const EscolherTop = ({ onChange }) => {
     }
 
   }
-  const [selectedTop, setSelectedTop] = useState(null);
 
-  const handleTopChange = (value, item, event) => {
+  const handleTopChange = (value) => {
     const selectedValue = value !== 'null' ? value : null;
-    setSelectedTop(selectedValue); // Atribui o valor escolhido à variavel
-    onChange(selectedValue); // Ao mudar, o valor selecionado recebe o valor
+    setSelectedTop(selectedValue);
   };
 
   const handleTopMenuOpen = () => {
@@ -36,30 +35,54 @@ export const EscolherTop = ({ onChange }) => {
     }
   };
 
+  const handleDeselect = (value) => {
+    const updatedSelectedTop = selectedTop.filter(item => item !== value);
+
+    if (updatedSelectedTop.length === 0) {
+      setSelectedTop(null);
+    } else {
+      setSelectedTop(updatedSelectedTop);
+    }
+  };
 
   const options = [
-    { value: 'null', label: 'TODAS' },
     ...data.map((top) => ({
-      value: top.codtipoper,
-      label: [top.codtipoper, ' - ', top.descricao]
+      value: parseInt(top.operacao.match(/\d{4}/), 10),
+      label: top.operacao
     }))
   ]
-  return (
-    <>
-      <SelectPicker
-        listProps={{ style: { width: '480px' } }}
-        style={{ width: '25%', }}
-        virtualized
-        onSelect={handleTopChange}
-        size='lg'
-        data={options}
-        placeholder={'Tipo de operação:'}
-        onOpen={handleTopMenuOpen}
-        value={selectedTop}
-        searchable={false}
-        loading={loading}
-      />
-    </>
 
+  return (
+    <Select
+      notFoundContent="0 resultados"
+      popupMatchSelectWidth={400}
+      loading={loading}
+      size='middle'
+      style={{ width: '25%', }}
+      placeholder='Selecione a top:'
+      options={options}
+      mode='multiple'
+      onFocus={handleTopMenuOpen}
+      onChange={handleTopChange}
+      onDeselect={handleDeselect}
+      filterOption={(input, option) =>
+        option.label.toLowerCase().includes(input.toLowerCase()) ||
+        option.value.toString().includes(input)
+      }
+    />
   )
 }
+
+// <SelectPicker
+//   listProps={{ style: { width: '480px' } }}
+//   style={{ width: '25%', }}
+//   virtualized
+//   onSelect={handleTopChange}
+//   size='lg'
+//   data={options}
+//   placeholder={'Tipo de operação:'}
+//   onOpen={handleTopMenuOpen}
+//   value={selectedTop}
+//   searchable
+//   loading={loading}
+// />

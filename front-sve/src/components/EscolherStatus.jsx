@@ -1,14 +1,25 @@
-import { useState } from 'react'
-import { SelectPicker } from 'rsuite';
+import { useContext } from 'react'
+import { Select } from 'antd'
+import { DataContext } from '../context/DataContext';
 
 // eslint-disable-next-line react/prop-types
-export const EscolherStatus = ({ onChange, onClean }) => {
-    const [selectedStatus, setSelectedStatus] = useState(null)
+export const EscolherStatus = () => {
+    const {selectedStatus, setSelectedStatus} = useContext(DataContext)
 
-    const handleStatusChange = (value, item, event) => {
+    const handleStatusChange = (value) => {
         const selectedValue = value !== 'null' ? value : null;
-        setSelectedStatus(selectedValue); // Atribui o valor escolhido à variavel
-        onChange(selectedValue); // Ao mudar, o valor selecionado recebe o valor
+        setSelectedStatus(selectedValue); 
+         
+    };
+
+    const handleDeselect = (value) => {
+        const updatedSelectedStatus = selectedStatus.filter(item => item !== value);
+
+        if (updatedSelectedStatus.length === 0) {
+            setSelectedStatus(null);
+        } else {
+            setSelectedStatus(updatedSelectedStatus);
+        }
     };
 
     const options = [
@@ -22,18 +33,19 @@ export const EscolherStatus = ({ onChange, onClean }) => {
     ]
 
     return (
-        <>
-            <SelectPicker
-                listProps={{ style: { width: '480px', height: '250px' } }}
-                style={{ width: '23%', }}
-                virtualized
-                onSelect={handleStatusChange}
-                size='lg'
-                data={options}
-                placeholder={'Status do pedido:'}
-                value={selectedStatus}
-                searchable={false}
-            />
-        </>
+        <Select
+            notFoundContent="0 resultados"
+            size='middle'
+            style={{ width: '25%' }}
+            placeholder='Selecione o status do pedido:'
+            options={options}
+            mode='multiple'
+            onChange={handleStatusChange}
+            onDeselect={handleDeselect}
+            filterOption={(input, option) =>
+                option.label.toLowerCase().includes(input.toLowerCase()) ||
+                option.value.toString().includes(input)
+            }
+        />
     )
 }
