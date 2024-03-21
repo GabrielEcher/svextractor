@@ -8,7 +8,7 @@ export const EscolherTop = () => {
   const [data, setData] = useState([])
   const [isApiCalled, setIsApiCalled] = useState(false)
   const [loading, setLoading] = useState(false)
-  const {selectedTop, setSelectedTop} = useContext(DataContext);
+  const { selectedTop, setSelectedTop } = useContext(DataContext);
 
   async function fetchTopApi() {
     try {
@@ -58,7 +58,7 @@ export const EscolherTop = () => {
       popupMatchSelectWidth={400}
       loading={loading}
       size='middle'
-      style={{ width: '25%', }}
+      style={{ width: '20%', }}
       placeholder='Operação'
       options={options}
       mode='multiple'
