@@ -17,6 +17,7 @@ const DataProvider = ({ children }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [exporting, setExporting] = useState(false);
+    const [fabricante, setFabricante] = useState(null)
     
     return (
         <DataContext.Provider
@@ -25,7 +26,7 @@ const DataProvider = ({ children }) => {
                 selectedTelevendas, setSelectedTelevendas, codigoCliente, setCodigoCliente,
                 selectedTop, setSelectedTop, selectedMarca, setSelectedMarca, codigoProd,
                 setCodigoProd, selectedStatus, setSelectedStatus, selectedCid, setSelectedCid,
-                startDate, setStartDate, endDate, setEndDate, exporting, setExporting,
+                startDate, setStartDate, endDate, setEndDate, exporting, setExporting, fabricante, setFabricante,
             }}>
             {children}
         </DataContext.Provider>

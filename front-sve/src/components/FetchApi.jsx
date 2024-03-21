@@ -14,13 +14,14 @@ export function useFetchApi() {
         codigoProd,
         selectedMarca,
         selectedStatus,
-        selectedCid } = useContext(DataContext);
+        selectedCid,
+        fabricante } = useContext(DataContext);
 
     const fetchData = async () => {
         try {
             setLoading(true);
             const response = await api_db.get(
-                `/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${startDate}/${endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}`
+                `/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${startDate}/${endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}/${fabricante}`
             );
             setData(response.data);
 

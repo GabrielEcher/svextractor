@@ -4,12 +4,12 @@ import { DataContext } from '../context/DataContext';
 
 // eslint-disable-next-line react/prop-types
 export const EscolherStatus = () => {
-    const {selectedStatus, setSelectedStatus} = useContext(DataContext)
+    const { selectedStatus, setSelectedStatus } = useContext(DataContext)
 
     const handleStatusChange = (value) => {
         const selectedValue = value !== 'null' ? value : null;
-        setSelectedStatus(selectedValue); 
-         
+        setSelectedStatus(selectedValue);
+
     };
 
     const handleDeselect = (value) => {
@@ -36,7 +36,7 @@ export const EscolherStatus = () => {
         <Select
             notFoundContent="0 resultados"
             size='middle'
-            style={{ width: '25%', }}
+            style={{ width: '20%', }}
             placeholder='Status pedido'
             options={options}
             mode='multiple'

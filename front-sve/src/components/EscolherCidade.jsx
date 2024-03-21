@@ -6,7 +6,7 @@ import { DataContext } from '../context/DataContext';
 export const EscolherCidade = () => {
   const [data, setData] = useState([])
   const [isApiCalled, setIsApiCalled] = useState(false)
-  const {selectedCid, setSelectedCid} = useContext(DataContext)
+  const { selectedCid, setSelectedCid } = useContext(DataContext)
   const [loading, setLoading] = useState(false)
 
   async function fetchCidadeApi() {
@@ -38,7 +38,7 @@ export const EscolherCidade = () => {
 
     if (updatedSelectedCid.length === 0) {
       setSelectedCid(null);
-      
+
     } else {
       setSelectedCid(updatedSelectedCid);
     }
@@ -58,7 +58,7 @@ export const EscolherCidade = () => {
       virtual
       loading={loading}
       size='middle'
-      style={{ width: '25%', }}
+      style={{ width: '20%', }}
       placeholder='Cidade'
       options={options}
       mode='multiple'

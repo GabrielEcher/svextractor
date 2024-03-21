@@ -1,6 +1,6 @@
 import React from 'react'
-import { Layout, Menu } from 'antd';
-const { Header, Footer, Content } = Layout;
+import { Layout, Menu, Divider } from 'antd';
+const { Header, Content, } = Layout;
 import { BuscarDados, GerarRelatorio, CleanButton, SkypeButton, WppButton, LogoutButton } from './Botoes'
 import { EscolherVend } from './EscolherVend'
 import { EscolherCliente } from './EscolherCliente'
@@ -11,29 +11,25 @@ import { EscolherMarca } from './EscolherMarca'
 import { EscolherProd } from './EscolherProd'
 import { EscolherStatus } from './EscolherStatus';
 import { EscolherCidade } from './EscolherCidade';
-import { MenuLateral } from './Menu';
+import { EscolherFab } from './EscolherFabricante';
 import { StatusButton } from '../services/CheckAPI';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TableData } from './Table';
 import { useFetchApi } from './FetchApi';
 import { useExportToXls } from './ExportData'
 import { ToastContainer } from 'react-toastify';
+import { AreaChartOutlined, BarChartOutlined } from '@ant-design/icons'
 
 const headerStyle = {
+    top: '0',
     paddingLeft: '7px',
     textAlign: 'left',
     marginBottom: '8px',
     backgroundColor: '#0958d9',
     width: '100%',
-    height: '60px'
-};
-
-const footerStyle = {
-    height: '5%',
-    textAlign: 'left',
-    color: '#fff',
-    backgroundColor: '#0958d9',
-
+    height: '60px',
+    zIndex: '0',
+    display: 'flex',
 
 };
 
@@ -43,7 +39,8 @@ const firstLineStyle = {
     backgroundColor: '#fff',
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    position: 'sticky'
 };
 
 const secondLineStyle = {
@@ -52,7 +49,8 @@ const secondLineStyle = {
     color: '#fff',
     backgroundColor: '#fff',
     display: 'flex', justifyContent: 'space-between',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    position: 'sticky'
 };
 
 const tableStyle = {
@@ -60,17 +58,21 @@ const tableStyle = {
 };
 
 
-const MainComp = () => {
+const RelatorioA = () => {
     const fetchData = useFetchApi();
     const exportData = useExportToXls();
 
+    
+
     return (
-        <Layout style={{ backgroundColor: '#fff', display: 'flex', flexDirection: 'column' }}>
+        <Layout style={{ backgroundColor: '#fff', display: 'flex', flexDirection: 'column', }}>
             <Header style={headerStyle}>
-                <h4 style={{ color: 'white', marginTop: '8px' }}>
-                    <Link onClick to={"/home"}><img src="./logo_white.png" width="45px" alt="" style={{ marginRight: '5px', }} /></Link>
+                <h4 style={{ color: 'white', marginTop: '8px', marginRight: '45px' }}>
+                    <Link onClick to={"/home"}><img src="../logo_white.png" width="45px" alt="" style={{ marginRight: '5px', }} /></Link>
                     Sales Vision Extractor
+
                 </h4>
+                
                 <StatusButton />
                 <WppButton />
                 <SkypeButton />
@@ -94,13 +96,15 @@ const MainComp = () => {
             <Content style={firstLineStyle}>
                 <EscolherCliente />
                 <EscolherProd />
+                <EscolherFab/>
                 <EscolherMarca />
                 <EscolherVend />
                 <EscolherTele />
-                <EscolherCidade />
+                
             </Content>
 
             <Content style={secondLineStyle}>
+                <EscolherCidade />
                 <EscolherTop />
                 <EscolherStatus />
                 <EscolherData />
@@ -112,6 +116,7 @@ const MainComp = () => {
             </Content>
 
             <Content style={tableStyle}>
+                <Divider>Relatório de vendas analítico</Divider>
                 <TableData />
             </Content>
 
@@ -121,6 +126,6 @@ const MainComp = () => {
     )
 }
 
-export default MainComp;
+export default RelatorioA;
 
 //

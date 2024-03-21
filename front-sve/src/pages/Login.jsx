@@ -123,7 +123,7 @@ function Login() {
     return <Spin size='large' fullscreen />;
   }
   if (authenticated && redirecting) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/home/relatorio-analitico" />;
   }
 }
 

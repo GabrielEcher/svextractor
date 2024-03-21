@@ -17,7 +17,7 @@ export const GerarRelatorio = ({ onClick }) => {
     return (
         <Tooltip title="Ao clicar, o download do relatório iniciará automaticamente!" color='gray'>
             <Button style={{ backgroundColor: 'green' }} icon={<DownloadOutlined />} type="primary" size='large' onClick={onClick} >
-            Exportar relatório (xlsx)
+            Exportar
         </Button>
         </Tooltip>
         
