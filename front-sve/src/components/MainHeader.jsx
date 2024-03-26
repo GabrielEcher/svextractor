@@ -2,7 +2,7 @@ import { Layout, Menu, } from 'antd';
 const { Header } = Layout;
 import { Link, useNavigate } from 'react-router-dom';
 import { AreaChartOutlined, BarChartOutlined } from '@ant-design/icons'
-import { SkypeButton, WppButton, LogoutButton } from './Botoes'
+import { SkypeButton, WppButton, LogoutButton, GlobalLoading } from './Botoes'
 import { StatusButton } from '../services/CheckAPI';
 import { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
@@ -65,6 +65,7 @@ export const MainHeader = () => {
                     </Menu.Item>
                 ))}
             </Menu>
+            <GlobalLoading/>
             <StatusButton />
                 <WppButton />
                 <SkypeButton />

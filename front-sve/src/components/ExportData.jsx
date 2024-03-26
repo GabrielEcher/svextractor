@@ -4,21 +4,21 @@ import { DataContext } from '../context/DataContext';
 import { toast } from 'react-toastify';
 
 export function useExportToXls() {
-  const { data, startDate, endDate, setLoading } = useContext(DataContext);
+  const { data, startDate, endDate, setLoadingGlobal, setDisabled } = useContext(DataContext);
 
   const exportData = async () => {
     try {
+      setLoadingGlobal(true);
+      setDisabled(true)
       if (!data.length) {
         toast.error("Nenhum dado para exportar");
       }
-
+      
       // eslint-disable-next-line no-inner-declarations
       function addRows(row) {
         const values = columns.map(column => row[column])
         worksheet.addRow(values);
       }
-
-      setLoading(true);
 
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet('Sheet 1');
@@ -38,15 +38,16 @@ export function useExportToXls() {
 
       setTimeout(() => {
         a.click();
-      }, 3000);
+        setDisabled(false)
+        setLoadingGlobal(false);
+      }, 1000);
 
 
     } catch (err) {
       toast.error("Error exporting to XLS:", err);
-    } finally {
-
-      setLoading(false); // Ensure exporting state is reset
-    }
+      setLoadingGlobal(false)
+      setDisabled(false)
+    } 
 
   }
   return exportData;

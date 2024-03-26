@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
-import { Button, Tooltip, } from 'antd'
+import { Button, Spin, Tooltip, } from 'antd'
 import { DeleteOutlined, SearchOutlined, DownloadOutlined, PoweroffOutlined, WhatsAppOutlined, SkypeOutlined } from '@ant-design/icons'
 import { DataContext } from '../context/DataContext';
+import { LoadingOutlined } from '@ant-design/icons';
 
 export const BuscarDados = ({ onClick }) => {
     return (
@@ -14,13 +15,15 @@ export const BuscarDados = ({ onClick }) => {
 }
 
 export const GerarRelatorio = ({ onClick }) => {
+    const { disabled } = useContext(DataContext);
+
     return (
         <Tooltip title="Ao clicar, o download do relatório iniciará automaticamente!" color='gray'>
-            <Button style={{ backgroundColor: 'green' }} icon={<DownloadOutlined />} type="primary" size='large' onClick={onClick} >
-            Exportar
-        </Button>
+            <Button disabled={disabled} style={{ backgroundColor: 'green' }} icon={<DownloadOutlined />} type="primary" size='large' onClick={onClick} >
+                Exportar
+            </Button>
         </Tooltip>
-        
+
     )
 }
 
@@ -123,4 +126,16 @@ export const LogoutButton = () => {
     )
 }
 
+export const GlobalLoading = () => {
+    const { loadingGlobal } = useContext(DataContext);
+
+    if (loadingGlobal) {
+        return (
+            <Spin
+                style={{ marginRight: '135px', marginTop: '15px' }}
+                indicator={<LoadingOutlined style={{ fontSize: 30, color: '#fff' }} />} />
+
+        )
+    }
+}
 
