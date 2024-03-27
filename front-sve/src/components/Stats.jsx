@@ -75,7 +75,13 @@ export const Statistics = () => {
                     value={totalFat}
                     prefix='R$'
                     decimalSeparator="."
-                    precision={2} />
+                    precision={2}
+                    valueStyle={{
+                        color: totalFat > 0 ? '#3f8600' : '#cf1322',
+                        
+                    }}
+                />
+
                 <Statistic
                     title="TOTAL:"
                     value={totalPed}
@@ -87,10 +93,16 @@ export const Statistics = () => {
                     value={aFat}
                     prefix='R$'
                     decimalSeparator="."
-                    precision={2} />
+                    precision={2}
+                    valueStyle={{
+                        color: '#cf1322',
+                    }} />
                 <Statistic
                     title="PEDIDOS:"
                     value={totalPedU}
+                    valueStyle={{
+                        color: totalPedU > 10 ? '#3f8600' : '#cf1322'
+                    }}
                 />
             </div>
         );
