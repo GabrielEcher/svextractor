@@ -5,6 +5,7 @@ import { MainHeader } from './MainHeader';
 import { MainNotification } from './MainNotification';
 import { FirstLineInputs, SecondLineInputs } from './Inputs';
 import { TablePersonalizated } from './Table';
+import { Statistics } from './Stats';
 
 
 const firstLineStyle = {
@@ -32,6 +33,7 @@ const tableStyle = {
 };
 
 
+
 export const RelatorioP = () => {
 
     return (
@@ -52,7 +54,7 @@ export const RelatorioP = () => {
             </Content>
 
             <Content style={tableStyle}>
-
+                <Statistics />
                 <TablePersonalizated />
             </Content>
 

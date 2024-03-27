@@ -31,7 +31,6 @@ export const EscolherData = () => {
       format={'DD/MM/YYYY'}
       locale={locale}
       onChange={handleDateChange} 
-
     />
   );
 };

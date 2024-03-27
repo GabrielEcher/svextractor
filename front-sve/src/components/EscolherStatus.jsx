@@ -23,7 +23,6 @@ export const EscolherStatus = () => {
     };
 
     const options = [
-        { value: 'null', label: 'TODOS' },
         { value: '15', label: 'CONFIRMADO' },
         { value: '16', label: 'EM LIBERAÇÃO FINANCEIRA/COMERCIAL' },
         { value: '3', label: 'AGUARDANDO LIBERAÇÃO LOGÍSTICA' },

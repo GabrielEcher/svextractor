@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Layout, Divider } from 'antd';
 const { Content, } = Layout;
 import { TableAnalitic } from './Table';
 import { MainHeader } from './MainHeader';
 import { MainNotification } from './MainNotification';
 import { FirstLineInputs, SecondLineInputs } from './Inputs';
+import { Statistics } from './Stats';
 
 const firstLineStyle = {
     minHeight: 50,
@@ -31,6 +32,7 @@ const tableStyle = {
 };
 
 const RelatorioA = () => {
+    
 
     return (
         <Layout style={{ backgroundColor: '#fff', display: 'flex', flexDirection: 'column', }}>
@@ -38,7 +40,7 @@ const RelatorioA = () => {
             <MainHeader />
 
             <Divider>Relatório de vendas analítico</Divider>
-            
+
             <MainNotification />
 
             <Content style={firstLineStyle}>
@@ -50,7 +52,7 @@ const RelatorioA = () => {
             </Content>
 
             <Content style={tableStyle}>
-                
+                <Statistics />
                 <TableAnalitic />
             </Content>
 
