@@ -8,7 +8,8 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 export const BuscarDados = ({ onClick }) => {
     return (
-        <Button color="blue" type="primary" size='large' icon={<SearchOutlined />} onClick={onClick}>
+        <Button color="blue" type="primary" size='large' icon={<SearchOutlined />} onClick={onClick}
+            style={{ top: '2px' }}>
             Buscar vendas
         </Button>
     );
@@ -19,7 +20,7 @@ export const GerarRelatorio = ({ onClick }) => {
 
     return (
         <Tooltip title="Ao clicar, o download do relatório iniciará automaticamente!" color='gray'>
-            <Button disabled={disabled} style={{ backgroundColor: 'green' }} icon={<DownloadOutlined />} type="primary" size='large' onClick={onClick} >
+            <Button disabled={disabled} style={{ backgroundColor: 'green', top: '2px' }} icon={<DownloadOutlined />} type="primary" size='large' onClick={onClick} >
                 Exportar
             </Button>
         </Tooltip>
@@ -36,7 +37,8 @@ export const CleanButton = () => {
 
     return (
         <Tooltip title="Limpar dados buscados." color='red' placement="leftBottom">
-            <Button type='primary' size='large' icon={<DeleteOutlined />} onClick={handleClick} danger />
+            <Button type='primary' size='large' icon={<DeleteOutlined />} onClick={handleClick} danger
+                style={{ top: '2px' }} />
         </Tooltip>
     );
 };
