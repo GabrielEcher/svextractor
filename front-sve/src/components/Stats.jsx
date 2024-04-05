@@ -15,7 +15,7 @@ export const Statistics = () => {
             if (data.length > 0) {
                 let sum = 0;
                 data.forEach(item => {
-                    if (key in item) {
+                    if (item.codigo_operacao !== 2224 && item.codigo_operacao !== 2212 && key in item) {
                         sum += item[key];
                     }
                 });
