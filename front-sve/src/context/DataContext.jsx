@@ -17,19 +17,23 @@ const DataProvider = ({ children }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [exporting, setExporting] = useState(false);
-    const [fabricante, setFabricante] = useState(null)
-    const [loadingGlobal, setLoadingGlobal] = useState(false)
-    const [disabled, setDisabled] = useState(false)
+    const [fabricante, setFabricante] = useState(null);
+    const [loadingGlobal, setLoadingGlobal] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+    const [divisao, setDivisao] = useState(null);
+
 
 
     return (
         <DataContext.Provider
             value={{
+                
                 data, setData, loading, setLoading, selectedVendedor, setSelectedVendedor,
                 selectedTelevendas, setSelectedTelevendas, codigoCliente, setCodigoCliente,
                 selectedTop, setSelectedTop, selectedMarca, setSelectedMarca, codigoProd,
                 setCodigoProd, selectedStatus, setSelectedStatus, selectedCid, setSelectedCid,
-                startDate, setStartDate, endDate, setEndDate, exporting, setExporting, fabricante, setFabricante, loadingGlobal, setLoadingGlobal, disabled, setDisabled,
+                startDate, setStartDate, endDate, setEndDate, exporting, setExporting, fabricante, setFabricante, loadingGlobal, setLoadingGlobal, disabled, setDisabled, divisao, setDivisao,
+
             }}>
             {children}
         </DataContext.Provider>

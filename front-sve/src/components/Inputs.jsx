@@ -11,6 +11,7 @@ import { EscolherCidade } from './EscolherCidade';
 import { EscolherFab } from './EscolherFabricante';
 import { useFetchApi } from './FetchApi';
 import { useExportToXls } from './ExportData'
+import { EscolherDivisao } from './EscolherDivisao'
 
 
 export const FirstLineInputs = () => {
@@ -22,6 +23,7 @@ export const FirstLineInputs = () => {
             <EscolherMarca />
             <EscolherVend />
             <EscolherTele />
+            <EscolherDivisao/>
         </>
 
     )

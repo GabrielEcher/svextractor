@@ -16,6 +16,7 @@ export const TableAnalitic = () => {
   const filtroCliente = [...new Set(data.map(item => item.nome_cliente))];
   const filtroCodCliente = [...new Set(data.map(item => item.codigo_cliente))];
   const filtroCidade = [...new Set(data.map(item => item.nome_cidade))];
+  
 
   const columns = [
     {
@@ -172,7 +173,7 @@ export const TablePersonalizated = () => {
   const filtroQntNota = [...new Set(data.map(item => item.quantidade_venda_nota))]
   const filtroTotalNota = [...new Set(data.map(item => item.valor_liquido_total_nota))]
   const filtroTotalPedido = [...new Set(data.map(item => item.valor_liquido_total_pedido))]
-
+  const filtroDivisao = [...new Set(data.map(item => item.nome_divisao))];
 
   const columns = [
     {
@@ -453,6 +454,21 @@ export const TablePersonalizated = () => {
       filterMode: 'tree',
       onFilter: (value, record) => {
         const stringValue = String(record.valor_liquido_total_nota); // Converte o valor para string
+        return stringValue.startsWith(value);
+      },
+    },
+    {
+      key: 'nome_divisao',
+      title: 'DIVISÃO',
+      dataIndex: 'nome_divisao',
+      filters: filtroDivisao.map(divisao => ({
+        text: divisao,
+        value: divisao
+      })),
+      filterSearch: true,
+      filterMode: 'tree',
+      onFilter: (value, record) => {
+        const stringValue = String(record.nome_divisao); // Converte o valor para string
         return stringValue.startsWith(value);
       },
     },
