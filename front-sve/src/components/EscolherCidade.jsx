@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
 import { Select } from 'antd'
 import { DataContext } from '../context/DataContext';
+import { toast } from 'react-toastify';
 
 export const EscolherCidade = () => {
   const [data, setData] = useState([])
@@ -15,7 +16,8 @@ export const EscolherCidade = () => {
       setData(response.data)
       setLoading(false)
     } catch (error) {
-      console.error(error)
+      toast.error('Erro ao buscar dados, faça login novamente, ou recarregue a página')
+      setLoading(false)
     }
   }
 

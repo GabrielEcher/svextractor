@@ -14,8 +14,8 @@ export const EscolherData = () => {
     setDateRange(dates)
     
     if (dates && dates.length === 2) {
-      const formattedStartDate = format(new Date(dates[0]), 'dd-MMM-yy', { locale: enUS });
-      const formattedEndDate = format(new Date(dates[1]), 'dd-MMM-yy', { locale: enUS });
+      const formattedStartDate = format(new Date(dates[0]), 'dd-MM-yy', { locale: enUS });
+      const formattedEndDate = format(new Date(dates[1]), 'dd-MM-yy', { locale: enUS });
 
       setStartDate(formattedStartDate);
       setEndDate(formattedEndDate);

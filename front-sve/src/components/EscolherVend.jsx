@@ -1,7 +1,8 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
 import { Select } from 'antd'
 import { DataContext } from '../context/DataContext';
+import { toast } from 'react-toastify';
 // eslint-disable-next-line react/prop-types
 export const EscolherVend = () => {
   const [data, setData] = useState([])
@@ -16,7 +17,8 @@ export const EscolherVend = () => {
       setLoading(false)
 
     } catch (error) {
-      console.error(error);
+      toast.error('Erro ao buscar dados, faça login novamente, ou recarregue a página')
+      setLoading(false)
     }
   };
 
@@ -57,7 +59,7 @@ export const EscolherVend = () => {
       notFoundContent="0 resultados"
       loading={loading}
       size='middle'
-      style={{ width: '25%',  }}
+      style={{ width: '15%',  }}
       placeholder='Vendedor'
       options={options}
       mode='multiple'

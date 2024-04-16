@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
 import { Select } from 'antd'
 import { DataContext } from '../context/DataContext';
+import { toast } from 'react-toastify';
 
 export const EscolherCliente = () => {
   const [data, setData] = useState([]);
@@ -27,7 +28,8 @@ export const EscolherCliente = () => {
       setLoading(false)
       
     } catch (error) {
-      console.error(error);
+      toast.error('Erro ao buscar dados, faça login novamente, ou recarregue a página')
+      setLoading(false)
     }
 
   }
@@ -67,7 +69,7 @@ export const EscolherCliente = () => {
       virtual
       loading={loading}
       size='middle'
-      style={{ width: '25%', }}
+      style={{ width: '15%' }}
       placeholder='Cliente/Código'
       options={filteredOptions.map((clientes) => ({
         value: parseInt(clientes.cliente.replace(/\D/g, ''), 10),

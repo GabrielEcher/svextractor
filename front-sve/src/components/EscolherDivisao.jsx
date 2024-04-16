@@ -34,7 +34,7 @@ export const EscolherDivisao = () => {
         <Select
             notFoundContent="0 resultados"
             size='middle'
-            style={{ width: '20%', }}
+            style={{ width: '15%', }}
             placeholder='Divisão'
             options={options}
             mode='multiple'

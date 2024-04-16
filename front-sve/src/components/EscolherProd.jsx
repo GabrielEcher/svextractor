@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { api_db } from "../services/api";
 import { Select } from 'antd';
 import { DataContext } from '../context/DataContext';
+import { toast } from 'react-toastify';
 
 // eslint-disable-next-line react/prop-types
 export const EscolherProd = () => {
@@ -29,7 +30,8 @@ export const EscolherProd = () => {
         setData(response.data);
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        toast.error('Erro ao buscar dados, faça login novamente, ou recarregue a página')
+        setLoading(false)
       }
     }
 
@@ -65,7 +67,7 @@ export const EscolherProd = () => {
       popupMatchSelectWidth={400}
       loading={loading}
       size='middle'
-      style={{ width: '25%' }}
+      style={{ width: '15%' }}
       placeholder='Produto/Código'
       options={filteredOptions.map((produtos) => ({
         value: parseInt(produtos.prod.match(/\d{1,7}/), 10),

@@ -13,7 +13,7 @@ function CleanupLocalStorageOnInactivity({ timeout = 1200000 /* 20 minutos em mi
       }
 
       inactivityTimeout = setTimeout(() => {
-        localStorage.clear('Bearer.Token')
+        localStorage.clear('access_token')
         window.location.reload();
       }, timeout);
     };

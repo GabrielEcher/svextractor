@@ -2,23 +2,24 @@ import { useContext, useState } from 'react'
 import { api_db } from "../services/api";
 import { Select } from 'antd'
 import { DataContext } from '../context/DataContext';
-
+import { toast } from 'react-toastify';
 // eslint-disable-next-line react/prop-types
 export const EscolherTele = () => {
     const [data, setData] = useState([])
     const [isApiCalled, setIsApiCalled] = useState(false)
-    const codvend = localStorage.getItem('User.ID')
+    const codvend = localStorage.getItem('access_id')
     const {selectedTelevendas, setSelectedTelevendas} = useContext(DataContext);
     const [loading, setLoading] = useState(false)
     
     const fetchVendedores = async () => {
       try {
-        const response = await api_db.get(`/televendas/${codvend}`)
+        const response = await api_db.get(`/televendas/${codvend}`,)
         setData(response.data);
         setLoading(false)
         
       } catch (error) {
-        console.error(error);
+        toast.error('Erro ao buscar dados, faça login novamente, ou recarregue a página')
+        setLoading(false)
       }
     };
   
@@ -59,7 +60,7 @@ export const EscolherTele = () => {
           notFoundContent="0 resultados"
           loading={loading}
           size='middle'
-          style={{ width: '25%',  }}
+          style={{ width: '15%',  }}
           placeholder='Televendas'
           options={options}
           mode='multiple'

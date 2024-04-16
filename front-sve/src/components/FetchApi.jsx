@@ -22,8 +22,9 @@ export function useFetchApi() {
         try {
             setLoading(true);
             const response = await api_db.get(
-                `/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${startDate}/${endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}/${fabricante}/${divisao}`
+                `/vendas/${selectedVendedor}/${selectedTelevendas}/${codigoCliente}/${startDate}/${endDate}/${selectedTop}/${codigoProd}/${selectedMarca}/${selectedStatus}/${selectedCid}/${fabricante}/${divisao}`,
             );
+            
             setData(response.data);
 
             toast.success('Vendas obtidas com sucesso!');
@@ -34,6 +35,8 @@ export function useFetchApi() {
                 toast.error('ERRO:404 Erro ao consultar dados, verifique os campos preenchidos! **Os campos de data devem ser preenchidos**');
             } else if (error.request.status === 0) {
                 toast.error('ERRO:500/0. Problema ao comunicar-se com a API, acione o suporte!');
+            } else if (error.request.status === 401) {
+                toast.error('ERRO: 401. Sua sessão expirou, faça login novamente!')
             }
             setLoading(false);
         }

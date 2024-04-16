@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { api_auth } from "../services/api";
 import { Navigate } from "react-router-dom";
+import { DataContext } from "./DataContext";
 
 export const AuthContext = createContext();
 
@@ -8,10 +9,10 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [apiStatus, setApiStatus] = useState(null);
   const [user, setUser] = useState(false);
-
+  const { setData } = useContext(DataContext)
   useEffect(() => {
     const loadingStoreData = () => {
-      const token = localStorage.getItem('Bearer.Token')
+      const token = localStorage.getItem('access_token')
       const cookieValue = document.cookie.split('; ').find(row => row.startsWith('ApiStatusContext='))?.split('=')[1];
       
       if (token && cookieValue === '200') {
@@ -28,8 +29,8 @@ export const AuthProvider = ({ children }) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      localStorage.setItem('Bearer.Token', result.data.access_token)
-      localStorage.setItem('User.ID', result.data.codvend)
+      localStorage.setItem('access_token', `Bearer ${result.data.access_token}`)
+      localStorage.setItem('access_id', result.data.codvend)
       document.cookie = `ApiStatusContext=${result.status}`
       
       setApiStatus(null);
@@ -47,7 +48,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signOut = () => {
-    localStorage.clear('Bearer.Token')
+    localStorage.clear('access_token')
+    localStorage.clear('access_id')
+    setData([])
     setUser(null);
     document.cookie = `ApiStatusContext=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     return <Navigate to="/" />;
