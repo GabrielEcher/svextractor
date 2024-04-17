@@ -15,7 +15,7 @@ export const AppRouter = () => {
       <Route path="404" element={<NotFoundDynamicTitle/>} />
         <Route path="/" element={<Login />} />
         <Route path="/app" element={<PrivateRoute />}>
-              <Route path="" element={<Home/>}/>
+              <Route path="" element={<HomePageDynamicTitle/>}/>
               <Route path="relatorio-analitico" element={<RelatorioAWithDynamicTitle />} />
               <Route path="relatorio-personalizado" element={<RelatorioPWithDynamicTitle />} />
                
@@ -40,6 +40,14 @@ const RelatorioPWithDynamicTitle = () => {
 
   return <RelatorioP />;
 };
+const HomePageDynamicTitle = () => {
+  useEffect(() => {
+    document.title = 'SVExtractor';
+  }, []); // Executar apenas uma vez ao montar o componente
+
+  return <Home />;
+};
+
 const NotFoundDynamicTitle = () => {
   useEffect(() => {
     document.title = '404 - Página não encontrada';
