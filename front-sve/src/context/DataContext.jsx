@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import { createContext, useState } from 'react'
 
 
 const DataContext = createContext();
@@ -21,6 +21,7 @@ const DataProvider = ({ children }) => {
     const [loadingGlobal, setLoadingGlobal] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [divisao, setDivisao] = useState(null);
+    const [apiChecked, setApiChecked] = useState(false);
 
 
 
@@ -33,7 +34,7 @@ const DataProvider = ({ children }) => {
                 selectedTop, setSelectedTop, selectedMarca, setSelectedMarca, codigoProd,
                 setCodigoProd, selectedStatus, setSelectedStatus, selectedCid, setSelectedCid,
                 startDate, setStartDate, endDate, setEndDate, exporting, setExporting, fabricante, setFabricante, loadingGlobal, setLoadingGlobal, disabled, setDisabled, divisao, setDivisao,
-
+                apiChecked, setApiChecked
             }}>
             {children}
         </DataContext.Provider>
