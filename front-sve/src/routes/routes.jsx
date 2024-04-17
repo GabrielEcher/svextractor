@@ -4,20 +4,19 @@ import { PrivateRoute } from "./privateRoutes";
 import { RelatorioP } from "../components/RelatorioPersonalizado";
 import RelatorioA from "../components/RelatorioAnalitico";
 import { useEffect } from "react";
+import { Home } from "../pages/Home";
+
 
 export const AppRouter = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-
-        <Route path="/home" element={<PrivateRoute />}>
-          <Route path="relatorio-analitico" element={<RelatorioAWithDynamicTitle />} />
-
-          <Route path="relatorio-personalizado" element={<RelatorioPWithDynamicTitle />} />
-
+        <Route path="/app" element={<PrivateRoute />}>
+              <Route path="" element={<Home/>}/>
+              <Route path="relatorio-analitico" element={<RelatorioAWithDynamicTitle />} />
+              <Route path="relatorio-personalizado" element={<RelatorioPWithDynamicTitle />} />   
         </Route>
-
       </Routes>
     </Router>
   );
