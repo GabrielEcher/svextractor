@@ -2,9 +2,10 @@
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 import { Button, Spin, Tooltip, } from 'antd'
-import { DeleteOutlined, SearchOutlined, DownloadOutlined, PoweroffOutlined, WhatsAppOutlined, SkypeOutlined } from '@ant-design/icons'
+import { DeleteOutlined, SearchOutlined, DownloadOutlined, PoweroffOutlined, WhatsAppOutlined, SkypeOutlined, HomeOutlined } from '@ant-design/icons'
 import { DataContext } from '../context/DataContext';
 import { LoadingOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const BuscarDados = ({ onClick }) => {
     return (
@@ -133,11 +134,39 @@ export const GlobalLoading = () => {
 
     if (loadingGlobal) {
         return (
+
             <Spin
-                style={{ marginRight: '135px', marginTop: '15px' }}
+                style={{right: '220px', marginTop: '15px', position: 'fixed' }}
                 indicator={<LoadingOutlined style={{ fontSize: 30, color: '#fff' }} />} />
 
         )
     }
 }
 
+export const HomeButton = () => {
+
+
+    return (
+        <Link to={'/app/'}>
+            <Button
+                icon={<HomeOutlined />}
+                size="md"
+                style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '175px',
+                    
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '30px',
+                    height: '30px',
+                    padding: 0,
+                }}
+                type="primary"
+                shape='circle'
+                 />
+        </Link>
+        
+    )
+}
