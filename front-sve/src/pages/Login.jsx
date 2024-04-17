@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import { Button, Form, Input, Divider, Alert, Spin } from 'antd'
 import { useContext, } from "react";
 import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 import { UserOutlined, LinkedinFilled } from '@ant-design/icons'
 import { FaKey } from 'react-icons/fa'
+import { useState } from 'react';
 
 function Login() {
   const { signIn, authenticated, apiStatus } = useContext(AuthContext);
@@ -123,7 +123,7 @@ function Login() {
     return <Spin size='large' fullscreen />;
   }
   if (authenticated && redirecting) {
-    return <Navigate to="/home/relatorio-analitico" />;
+    return <Navigate to="/app/" />;
   }
 }
 
