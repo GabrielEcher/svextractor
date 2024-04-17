@@ -22,6 +22,7 @@ const DataProvider = ({ children }) => {
     const [disabled, setDisabled] = useState(false);
     const [divisao, setDivisao] = useState(null);
     const [apiChecked, setApiChecked] = useState(false);
+    const [apiStatus, setApiStatus] = useState(null);
 
 
 
@@ -34,7 +35,7 @@ const DataProvider = ({ children }) => {
                 selectedTop, setSelectedTop, selectedMarca, setSelectedMarca, codigoProd,
                 setCodigoProd, selectedStatus, setSelectedStatus, selectedCid, setSelectedCid,
                 startDate, setStartDate, endDate, setEndDate, exporting, setExporting, fabricante, setFabricante, loadingGlobal, setLoadingGlobal, disabled, setDisabled, divisao, setDivisao,
-                apiChecked, setApiChecked
+                apiChecked, setApiChecked, apiStatus, setApiStatus,
             }}>
             {children}
         </DataContext.Provider>

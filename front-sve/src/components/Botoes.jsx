@@ -5,7 +5,7 @@ import { Button, Spin, Tooltip, } from 'antd'
 import { DeleteOutlined, SearchOutlined, DownloadOutlined, PoweroffOutlined, WhatsAppOutlined, SkypeOutlined, HomeOutlined } from '@ant-design/icons'
 import { DataContext } from '../context/DataContext';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const BuscarDados = ({ onClick }) => {
     return (
@@ -46,7 +46,7 @@ export const CleanButton = () => {
 
 export const SkypeButton = () => {
     return (
-        <Tooltip title="Clique para obter suporte no skype" color='blue'>
+        <Tooltip title="Obter suporte no skype" color='blue'>
             <Button
                 href='https://join.skype.com/invite/aTjYIjW8AdY5'
                 icon={<span style={{ lineHeight: '30px', textAlign: 'center' }}>
@@ -75,7 +75,7 @@ export const SkypeButton = () => {
 }
 export const WppButton = () => {
     return (
-        <Tooltip title="Clique para obter suporte no WhatsApp" color='#25D366'>
+        <Tooltip title="Obter suporte no WhatsApp" color='#25D366'>
             <Button
                 href='https://wa.me/555198619089?text=Preciso%20de%20suporte%20para%20o%20SVExtractor!'
                 icon={<span style={{ lineHeight: '30px', textAlign: 'center' }}>
@@ -104,7 +104,7 @@ export const WppButton = () => {
 export const LogoutButton = () => {
     const { signOut } = useContext(AuthContext)
     return (
-        <Tooltip title="Sair do SVExtractor" color='gray'>
+        <Tooltip title="Sair do SVExtractor" color='red' >
             <Button
                 icon={<PoweroffOutlined />}
                 size="md"
@@ -136,37 +136,48 @@ export const GlobalLoading = () => {
         return (
 
             <Spin
-                style={{right: '220px', marginTop: '15px', position: 'fixed' }}
+                style={{ right: '220px', marginTop: '15px', position: 'fixed' }}
                 indicator={<LoadingOutlined style={{ fontSize: 30, color: '#fff' }} />} />
 
         )
     }
 }
 
+
+
+
 export const HomeButton = () => {
 
 
+
     return (
-        <Link to={'/app/'}>
-            <Button
-                icon={<HomeOutlined />}
-                size="md"
-                style={{
-                    position: 'absolute',
-                    top: '15px',
-                    right: '175px',
-                    
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '50%',
-                    width: '30px',
-                    height: '30px',
-                    padding: 0,
-                }}
-                type="primary"
-                shape='circle'
-                 />
+
+        <Link to="/app">
+            <Tooltip title="Voltar ao início" color='grey' placement="bottom">
+                <Button
+                    icon={<HomeOutlined />}
+                    size="md"
+                    style={{
+                        position: 'fixed',
+                        top: '15px',
+                        right: '175px',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        padding: 0,
+                    }}
+                    type="primary"
+                    shape='circle'
+
+                />
+            </Tooltip>
         </Link>
-        
+
+
+
+
+
     )
 }

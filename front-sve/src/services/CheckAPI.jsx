@@ -1,12 +1,11 @@
 import { DisconnectOutlined, ApiOutlined } from '@ant-design/icons';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { api_db } from '../services/api';
 import { Button, Tooltip } from 'antd';
 import { DataContext } from '../context/DataContext';
 
 export const StatusButton = () => {
-    const { apiChecked, setApiChecked } = useContext(DataContext);
-    const [apiStatus, setApiStatus] = useState(null);  
+    const { setApiChecked, apiStatus, setApiStatus } = useContext(DataContext);  
 
     const checkApi = async () => {
         try {
@@ -27,9 +26,9 @@ export const StatusButton = () => {
     const buttonColor = apiStatus === 200 ? 'yellowgreen' : apiStatus === 500 ? 'red' : 'white';
 
     return (
-        <Tooltip title={apiStatus === 200 ? "Serviço de busca está online!" : apiStatus === 500 ? "Erro ao verificar serviço de busca!" : "Clique para verificar o status do serviço de busca"}
+        <Tooltip title={apiStatus === 200 ? "Serviço de busca está online!" : apiStatus === 500 ? "Erro ao verificar serviço de busca!" : "Verificar o status do serviço de busca"}
             color={apiStatus === 200 ? 'green' : apiStatus === 500 ? 'red' : 'grey'}
-            placement='left'>
+            placement="bottom">
             <Button
                 size="lg"
                 icon={<span
