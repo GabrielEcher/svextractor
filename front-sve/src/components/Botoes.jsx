@@ -158,7 +158,7 @@ export const HomeButton = () => {
                     icon={<HomeOutlined />}
                     size="md"
                     style={{
-                        position: 'fixed',
+                        position: 'absolute',
                         top: '15px',
                         right: '175px',
                         color: '#fff',
