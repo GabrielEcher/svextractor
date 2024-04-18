@@ -37,6 +37,8 @@ export function useFetchApi() {
                 toast.error('ERRO:500/0. Problema ao comunicar-se com a API, acione o suporte!');
             } else if (error.request.status === 401) {
                 toast.error('ERRO: 401. Sua sessão expirou, faça login novamente!')
+            } else if (error.request.status === 500) {
+                toast.error('ERRO: 401. Sua sessão expirou, faça login novamente!')
             }
             setLoading(false);
         }
