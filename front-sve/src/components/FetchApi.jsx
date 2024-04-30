@@ -32,13 +32,13 @@ export function useFetchApi() {
             setLoading(false);
         } catch (error) {
             if (error.request.status === 404) {
-                toast.error('ERRO:404 Erro ao consultar dados, verifique os campos preenchidos! **Os campos de data devem ser preenchidos**');
+                toast.error('Erro ao consultar dados, verifique os campos preenchidos! (os campos de data devem ser preenchidos)');
             } else if (error.request.status === 0) {
-                toast.error('ERRO:500/0. Problema ao comunicar-se com a API, acione o suporte!');
+                toast.error('Problema ao comunicar-se com a API, acione o suporte!');
             } else if (error.request.status === 401) {
-                toast.error('ERRO: 401. Sua sessão expirou, faça login novamente!')
+                toast.error('Sua sessão expirou, faça login novamente!')
             } else if (error.request.status === 500 || error.request.status === 502) {
-                toast.error('ERRO:500/502. Problema ao comunicar-se com a API, tente fazer login novamente!')
+                toast.error('Problema ao comunicar-se com a API, tente fazer login novamente!')
             }
             setLoading(false);
         }
