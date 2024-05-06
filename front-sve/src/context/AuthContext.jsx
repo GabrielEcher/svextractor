@@ -10,17 +10,17 @@ export const AuthProvider = ({ children }) => {
   const [apiStatus, setApiStatus] = useState(null);
   const [user, setUser] = useState(false);
   const { setData } = useContext(DataContext)
+
   useEffect(() => {
     const loadingStoreData = () => {
       const token = localStorage.getItem('access_token')
-      const cookieValue = document.cookie.split('; ').find(row => row.startsWith('ApiStatusContext='))?.split('=')[1];
       
-      if (token && cookieValue === '200') {
+      if (token && apiStatus === 200) {
         setUser(true);
       }
     };
     loadingStoreData();
-  }, []);
+  }, [apiStatus]);
 
   const signIn = async ({ username, password }) => {
     try {
@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }) => {
       });
       localStorage.setItem('access_token', `Bearer ${result.data.access_token}`)
       localStorage.setItem('access_id', result.data.codvend)
-      document.cookie = `ApiStatusContext=${result.status}`
       
       setApiStatus(null);
       setUser(true);
@@ -52,7 +51,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.clear('access_id')
     setData([])
     setUser(null);
-    document.cookie = `ApiStatusContext=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     return <Navigate to="/" />;
     
   };
