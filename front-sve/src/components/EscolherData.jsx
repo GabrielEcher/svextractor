@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { format } from 'date-fns';
 import { DatePicker } from 'antd';
 import locale from 'antd/es/date-picker/locale/pt_BR';
-import {enUS} from 'date-fns/locale'
 import { DataContext } from '../context/DataContext';
 const { RangePicker } = DatePicker;
 
@@ -14,8 +13,8 @@ export const EscolherData = () => {
     setDateRange(dates)
     
     if (dates && dates.length === 2) {
-      const formattedStartDate = format(new Date(dates[0]), 'dd-MMM-yy', { locale: enUS });
-      const formattedEndDate = format(new Date(dates[1]), 'dd-MMM-yy', { locale: enUS });
+      const formattedStartDate = format(new Date(dates[0]), 'dd-MMM-yy',);
+      const formattedEndDate = format(new Date(dates[1]), 'dd-MMM-yy',);
 
       setStartDate(formattedStartDate);
       setEndDate(formattedEndDate);

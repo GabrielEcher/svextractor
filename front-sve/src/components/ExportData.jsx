@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import ExcelJS from 'exceljs'
 import { DataContext } from '../context/DataContext';
 import { toast } from 'react-toastify';
+import { format } from 'date-fns';
 
 export function useExportToXls() {
   const { data, startDate, endDate, setLoadingGlobal, setDisabled } = useContext(DataContext);
 
   const exportData = async () => {
+    
     try {
       setLoadingGlobal(true);
       setDisabled(true)
@@ -34,7 +36,11 @@ export function useExportToXls() {
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = `relatorio_vendas-${startDate}-${endDate}.xlsx`;
+
+      const formattedStartDate = format(new Date(startDate), 'dd-MM-yy',);
+      const formattedEndDate = format(new Date(endDate), 'dd-MM-yy',);
+
+      a.download = `relatorio_vendas-${formattedStartDate} - ${formattedEndDate}.xlsx`;
 
       setTimeout(() => {
         a.click();
@@ -44,7 +50,7 @@ export function useExportToXls() {
 
 
     } catch (err) {
-      toast.error("Error exporting to XLS:", err);
+      toast.error("Erro ao exportar arquivo");
       setLoadingGlobal(false)
       setDisabled(false)
     } 
