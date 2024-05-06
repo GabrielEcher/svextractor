@@ -83,6 +83,8 @@ function Login() {
                 type='error'
                 message={apiStatus}
                 closable
+                showIcon
+                style={{height: '50px'}}
               />
             )}
 
