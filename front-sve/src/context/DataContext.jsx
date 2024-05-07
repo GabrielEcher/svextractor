@@ -4,10 +4,11 @@ import { createContext, useState } from 'react'
 const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
+    
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedVendedor, setSelectedVendedor] = useState(null);
-    const [selectedTelevendas, setSelectedTelevendas] = useState(null);
+    const [selectedTelevendas, setSelectedTelevendas] = useState(localStorage.getItem('access_id'));
     const [codigoCliente, setCodigoCliente] = useState(null);
     const [selectedTop, setSelectedTop] = useState(null);
     const [selectedMarca, setSelectedMarca] = useState(null);
@@ -35,7 +36,7 @@ const DataProvider = ({ children }) => {
                 selectedTop, setSelectedTop, selectedMarca, setSelectedMarca, codigoProd,
                 setCodigoProd, selectedStatus, setSelectedStatus, selectedCid, setSelectedCid,
                 startDate, setStartDate, endDate, setEndDate, exporting, setExporting, fabricante, setFabricante, loadingGlobal, setLoadingGlobal, disabled, setDisabled, divisao, setDivisao,
-                apiChecked, setApiChecked, apiStatus, setApiStatus,
+                apiChecked, setApiChecked, apiStatus, setApiStatus, 
             }}>
             {children}
         </DataContext.Provider>
