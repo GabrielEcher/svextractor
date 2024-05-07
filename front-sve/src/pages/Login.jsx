@@ -1,4 +1,4 @@
-import { Button, Form, Input, Divider, Alert, Spin } from 'antd'
+import { Button, Form, Input, Divider, Alert } from 'antd'
 import { useContext, } from "react";
 import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
@@ -8,10 +8,12 @@ import { useState } from 'react';
 
 function Login() {
   const { signIn, authenticated, apiStatus } = useContext(AuthContext);
-  const [redirecting, setRedirecting] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const onFinish = async (e) => {
+    setLoading(true)
     await signIn({ username: e.username, password: e.password })
+    setLoading(false)
+    
   }
 
   const handleKeyPress = (event) => {
@@ -94,7 +96,10 @@ function Login() {
               <Button
                 htmlType='submit'
                 style={{ backgroundColor: 'green', width: '100%' }}
-                type="primary">Entrar</Button>
+                type="primary"
+                loading={loading}
+                >Entrar</Button>
+              
             </Form.Item>
 
             <Link
@@ -118,13 +123,8 @@ function Login() {
       </>
 
     )
-  } else if (authenticated && !redirecting) {
-    setTimeout(() => {
-      setRedirecting(true);
-    }, 1000);
-    return <Spin size='large' fullscreen />;
-  }
-  if (authenticated && redirecting) {
+  } 
+  if (authenticated) {
     return <Navigate to="/app/" />;
   }
 }
