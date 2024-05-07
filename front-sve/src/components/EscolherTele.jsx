@@ -7,13 +7,11 @@ import { toast } from 'react-toastify';
 export const EscolherTele = () => {
     const [data, setData] = useState([])
     const [isApiCalled, setIsApiCalled] = useState(false)
-    const codvend = localStorage.getItem('access_id')
     const {selectedTelevendas, setSelectedTelevendas} = useContext(DataContext);
     const [loading, setLoading] = useState(false)
-    
     const fetchVendedores = async () => {
       try {
-        const response = await api_db.get(`/televendas/${codvend}`,)
+        const response = await api_db.get(`/televendas/${localStorage.getItem('access_id')}`,)
         setData(response.data);
         setLoading(false)
         
@@ -41,7 +39,7 @@ export const EscolherTele = () => {
       const updatedSelectedVend = selectedTelevendas.filter(item => item !== value);
   
       if (updatedSelectedVend.length === 0) {
-        setSelectedTelevendas(null);
+        setSelectedTelevendas(localStorage.getItem('access_id'));
       } else {
         setSelectedTelevendas(updatedSelectedVend);
       }
