@@ -47,8 +47,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signOut = () => {
-    localStorage.clear('access_token')
-    localStorage.clear('access_id')
+    localStorage.clear();
+    window.location.reload();
     setData([])
     setUser(null);
     return <Navigate to="/" />;
