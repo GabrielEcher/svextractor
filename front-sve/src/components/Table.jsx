@@ -282,6 +282,36 @@ export const TablePersonalizated = () => {
       filterMode: 'tree',
       onFilter: (value, record) => record.nome_cliente.startsWith(value),
     },
+    {
+      key: 'total_pedido',
+      title: 'TOTAL PEDIDO (R$)',
+      dataIndex: 'valor_liquido_total_pedido',
+      filters: filtroTotalPedido.map(totalpedido => ({
+        text: totalpedido,
+        value: parseFloat(totalpedido)
+      })),
+      filterSearch: true,
+      filterMode: 'tree',
+      onFilter: (value, record) => {
+        const stringValue = String(record.valor_liquido_total_pedido); // Converte o valor para string
+        return stringValue.startsWith(value);
+      },
+    },
+    {
+      key: 'total_nota',
+      title: 'TOTAL NOTA (R$)',
+      dataIndex: 'valor_liquido_total_nota',
+      filters: filtroTotalNota.map(totalnota => ({
+        text: totalnota,
+        value: parseFloat(totalnota)
+      })),
+      filterSearch: true,
+      filterMode: 'tree',
+      onFilter: (value, record) => {
+        const stringValue = String(record.valor_liquido_total_nota); // Converte o valor para string
+        return stringValue.startsWith(value);
+      },
+    },
 
   ]
 
@@ -427,36 +457,7 @@ export const TablePersonalizated = () => {
         return stringValue.startsWith(value);
       },
     },
-    {
-      key: 'total_pedido',
-      title: 'TOTAL PEDIDO (R$)',
-      dataIndex: 'valor_liquido_total_pedido',
-      filters: filtroTotalPedido.map(totalpedido => ({
-        text: totalpedido,
-        value: totalpedido
-      })),
-      filterSearch: true,
-      filterMode: 'tree',
-      onFilter: (value, record) => {
-        const stringValue = String(record.valor_liquido_total_pedido); // Converte o valor para string
-        return stringValue.startsWith(value);
-      },
-    },
-    {
-      key: 'total_nota',
-      title: 'TOTAL NOTA (R$)',
-      dataIndex: 'valor_liquido_total_nota',
-      filters: filtroTotalNota.map(totalnota => ({
-        text: totalnota,
-        value: totalnota
-      })),
-      filterSearch: true,
-      filterMode: 'tree',
-      onFilter: (value, record) => {
-        const stringValue = String(record.valor_liquido_total_nota); // Converte o valor para string
-        return stringValue.startsWith(value);
-      },
-    },
+    
     {
       key: 'nome_divisao',
       title: 'DIVISÃO',

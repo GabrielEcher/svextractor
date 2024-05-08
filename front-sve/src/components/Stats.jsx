@@ -16,10 +16,10 @@ export const Statistics = () => {
                 let sum = 0;
                 data.forEach(item => {
                     if (item.codigo_operacao !== 2224 && item.codigo_operacao !== 2212 && key in item) {
-                        sum += item[key];
+                        sum += (item[key]);
                     }
                 });
-                return sum;
+                return parseInt(sum);
             } else {
                 return 0;
             }
@@ -38,7 +38,7 @@ export const Statistics = () => {
                 const contador = {};
                 data.forEach(item => {
                     if (key in item) {
-                        const valor = item[key];
+                        const valor = parseInt(item[key]);
                         if (!Object.values(contador).includes(valor)) {
                             contador[valor] = 1;
                         } else {
