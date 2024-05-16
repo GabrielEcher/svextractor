@@ -50,7 +50,7 @@ export function useExportToXls() {
 
 
     } catch (err) {
-      toast.error("Erro ao exportar arquivo");
+      toast.error(`Erro ao exportar arquivo: ${err}`);
       setLoadingGlobal(false)
       setDisabled(false)
     } 

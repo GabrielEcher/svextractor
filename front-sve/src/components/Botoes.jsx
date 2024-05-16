@@ -70,9 +70,6 @@ export const SkypeButton = () => {
                 shape='circle'
                 target='_blank' />
         </Tooltip>
-
-
-
     )
 }
 
@@ -101,9 +98,6 @@ export const WppButton = () => {
                 shape='circle'
                 target='_blank' />
         </Tooltip>
-
-
-
     )
 }
 
@@ -126,14 +120,12 @@ export const LogoutButton = () => {
                     height: '30px',
                     padding: 0,
                     boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)'
-                    
+
                 }}
                 type="primary"
                 shape='circle'
                 onClick={signOut} />
         </Tooltip>
-
-
     )
 }
 
@@ -152,11 +144,7 @@ export const GlobalLoading = () => {
 }
 
 export const HomeButton = () => {
-
-
-
     return (
-
         <Link to="/app">
             <Tooltip title="Voltar ao início" color='grey' placement="bottom">
                 <Button
@@ -181,11 +169,6 @@ export const HomeButton = () => {
                 />
             </Tooltip>
         </Link>
-
-
-
-
-
     )
 }
 
