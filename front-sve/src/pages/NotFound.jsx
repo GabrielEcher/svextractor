@@ -14,7 +14,7 @@ const headerStyle = {
     height: '60px',
     zIndex: '0',
     display: 'flex',
-
+    alignItems: 'center'
 };
 
 export const PageNotFound = () => {
@@ -41,6 +41,7 @@ export const PageNotFound = () => {
                     width: '50px',
                     height: '45px',
                     padding: 0,
+                    boxShadow: 'none'
                 }}
                 type="primary"
                 shape='circle'

@@ -13,7 +13,7 @@ function Login() {
     setLoading(true)
     await signIn({ username: e.username, password: e.password })
     setLoading(false)
-    
+
   }
 
   const handleKeyPress = (event) => {
@@ -32,32 +32,26 @@ function Login() {
             justifyContent: 'center',
             alignItems: 'center',
             height: '100vh',
-            backgroundColor: '#E8E8E8',
+            backgroundColor: '#fff',
           }}>
+
+          <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'center' }}>
+            <img style={{ width: '65px' }} src="./icon_black.png" alt="" />
+            <h3 style={{ color: 'black' }}>SVExtractor</h3>
+          </div>
 
           <Form
             onFinish={onFinish}
             size='large'
             variant='outlined'
             onKeyPress={handleKeyPress}
-            style={{ width: '400px', backgroundColor: '#fff', padding: '25px', borderRadius: '20px', }}
+            style={{ width: '400px', backgroundColor: '#fff', padding: '25px', borderRadius: '20px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.5)' }}
           >
-            <Form.Item>
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', height: '40px' }}>
-                <Link
-                  to={'https://diamaju.com.br/'}
-                  target='_blank'>
-                  <img
-                    style={{ width: '180px', }}
-                    src="https://diamaju.com.br/uploads/config/123/logo.png" alt="" />
-                </Link>
-              </div>
 
-            </Form.Item>
             <Form.Item>
-              <h3><img style={{ width: '35px', marginBottom: '0.1vh' }} src="./logo_svextractor_notext.ico" alt="" /> SVExtractor</h3>
+              <h2>Faça seu login</h2>
             </Form.Item>
-            <Divider />
+
             <Form.Item
               name="username"
               label={<UserOutlined />}
@@ -86,7 +80,7 @@ function Login() {
                 message={apiStatus}
                 closable
                 showIcon
-                style={{height: '50px'}}
+                style={{ height: '50px' }}
               />
             )}
 
@@ -98,8 +92,8 @@ function Login() {
                 style={{ backgroundColor: 'green', width: '100%' }}
                 type="primary"
                 loading={loading}
-                >Entrar</Button>
-              
+              >Entrar</Button>
+
             </Form.Item>
 
             <Link
@@ -123,7 +117,7 @@ function Login() {
       </>
 
     )
-  } 
+  }
   if (authenticated) {
     return <Navigate to="/app/" />;
   }

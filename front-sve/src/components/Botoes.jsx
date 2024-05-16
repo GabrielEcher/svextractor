@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
-import { Button, Spin, Tooltip, } from 'antd'
+import { Button, Spin, Tooltip } from 'antd'
 import { DeleteOutlined, SearchOutlined, DownloadOutlined, PoweroffOutlined, WhatsAppOutlined, SkypeOutlined, HomeOutlined } from '@ant-design/icons'
 import { DataContext } from '../context/DataContext';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -57,12 +57,14 @@ export const SkypeButton = () => {
                     position: 'absolute',
                     top: '15px',
                     right: '95px',
-                    color: '#fff',
+                    color: 'black',
                     border: 'none',
                     borderRadius: '50%',
                     width: '30px',
                     height: '30px',
                     padding: 0,
+                    backgroundColor: 'inherit',
+                    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)'
                 }}
                 type="primary"
                 shape='circle'
@@ -73,6 +75,7 @@ export const SkypeButton = () => {
 
     )
 }
+
 export const WppButton = () => {
     return (
         <Tooltip title="Obter suporte no WhatsApp" color='#25D366'>
@@ -86,12 +89,14 @@ export const WppButton = () => {
                     position: 'absolute',
                     top: '15px',
                     right: '55px',
-                    color: '#fff',
+                    color: 'black',
                     border: 'none',
                     borderRadius: '50%',
                     width: '30px',
                     height: '30px',
                     padding: 0,
+                    backgroundColor: 'inherit',
+                    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)'
                 }}
                 shape='circle'
                 target='_blank' />
@@ -101,6 +106,7 @@ export const WppButton = () => {
 
     )
 }
+
 export const LogoutButton = () => {
     const { signOut } = useContext(AuthContext)
     return (
@@ -112,13 +118,15 @@ export const LogoutButton = () => {
                     position: 'absolute',
                     top: '15px',
                     right: '15px',
-                    color: '#fff',
-                    backgroundColor: '',
+                    color: 'black',
+                    backgroundColor: 'inherit',
                     border: 'none',
                     borderRadius: '50%',
                     width: '30px',
                     height: '30px',
                     padding: 0,
+                    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)'
+                    
                 }}
                 type="primary"
                 shape='circle'
@@ -136,15 +144,12 @@ export const GlobalLoading = () => {
         return (
 
             <Spin
-                style={{ right: '220px', marginTop: '15px', position: 'fixed' }}
-                indicator={<LoadingOutlined style={{ fontSize: 30, color: '#fff' }} />} />
+                style={{ right: '220px', marginTop: '1px', position: 'fixed', alignItems: 'center' }}
+                indicator={<LoadingOutlined style={{ fontSize: 30, color: 'black' }} />} />
 
         )
     }
 }
-
-
-
 
 export const HomeButton = () => {
 
@@ -161,12 +166,14 @@ export const HomeButton = () => {
                         position: 'absolute',
                         top: '15px',
                         right: '175px',
-                        color: '#fff',
+                        color: 'black',
                         border: 'none',
                         borderRadius: '50%',
                         width: '30px',
                         height: '30px',
                         padding: 0,
+                        backgroundColor: 'inherit',
+                        boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)'
                     }}
                     type="primary"
                     shape='circle'
@@ -181,3 +188,8 @@ export const HomeButton = () => {
 
     )
 }
+
+
+
+
+

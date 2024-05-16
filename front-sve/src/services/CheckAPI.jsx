@@ -23,7 +23,7 @@ export const StatusButton = () => {
     };
 
     // Define a cor padrão do botão com base no estado apiStatus
-    const buttonColor = apiStatus === 200 ? 'yellowgreen' : apiStatus === 500 ? 'red' : 'white';
+    const buttonColor = apiStatus === 200 ? 'green' : apiStatus === 500 ? 'red' : 'white';
 
     return (
         <Tooltip title={apiStatus === 200 ? "Serviço de busca está online!" : apiStatus === 500 ? "Erro ao verificar serviço de busca!" : "Verificar o status do serviço de busca"}
@@ -39,12 +39,14 @@ export const StatusButton = () => {
                     position: 'absolute',
                     top: '15px',
                     right: '135px',
-                    color: buttonColor, // Texto branco para visibilidade
+                    color: 'black', // Texto branco para visibilidade
                     border: 'none',
                     borderRadius: '50%',
                     width: '30px',
                     height: '30px',
                     padding: 0,
+                    backgroundColor: buttonColor,
+                    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)'
                 }}
                 type="primary"
                 shape='circle'
