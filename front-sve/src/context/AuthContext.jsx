@@ -14,10 +14,19 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const loadingStoreData = () => {
       const token = localStorage.getItem('access_token')
+      const expireTimeStored = localStorage.getItem('expireTime');
+
+      if (expireTimeStored) {
+            const expireTime = new Date(expireTimeStored);
+            const currentTime = new Date();
       
-      if (token && apiStatus === 200) {
-        setUser(true);
-      }
+            if (currentTime > expireTime) {
+              localStorage.clear();
+              window.location.href = '/';
+            } else if (token) { 
+              setUser(true); 
+            }
+          }
     };
     loadingStoreData();
   }, [apiStatus]);
@@ -31,8 +40,10 @@ export const AuthProvider = ({ children }) => {
       });
       localStorage.setItem('access_token', `Bearer ${result.data.access_token}`)
       localStorage.setItem('access_id', result.data.codvend)
-      
-      setApiStatus(null);
+      const expireTime = new Date();
+      expireTime.setDate(expireTime.getDate() + 1);
+      localStorage.setItem('expireTime', expireTime.toString());
+      setApiStatus(200);
       setUser(true);
       
 

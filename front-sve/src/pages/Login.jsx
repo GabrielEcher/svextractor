@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 function Login() {
   const { signIn, authenticated, apiStatus } = useContext(AuthContext);
+  console.log(authenticated)
   const [loading, setLoading] = useState(false)
   const onFinish = async (e) => {
     setLoading(true)
